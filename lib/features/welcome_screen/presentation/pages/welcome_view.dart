@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -49,7 +50,12 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 50),
-                  CustomBotton(text: 'Let’s Continue'),
+                  CustomBotton(
+                    text: 'Let’s Continue',
+                    ontap: () {
+                      context.goNamed('Authontication');
+                    },
+                  ),
                 ],
               ),
             ),

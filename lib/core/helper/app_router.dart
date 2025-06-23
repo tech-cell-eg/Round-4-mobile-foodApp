@@ -1,6 +1,7 @@
+import 'package:fruit_hub/features/autherntication_screen/presentation/authentication_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
-import 'package:fruit_hub/features/splash/presentation/pages/splash_page.dart';
-import 'package:fruit_hub/features/welcome_page/presentation/pages/welcome_page.dart';
+import 'package:fruit_hub/features/splash_screen/presentation/pages/splash_view.dart';
+import 'package:fruit_hub/features/welcome_screen/presentation/pages/welcome_view.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
@@ -17,6 +18,11 @@ abstract class AppRouter {
         path: WelcomePage.kWelcomeView,
         name: "welcome",
         builder: (context, state) => const WelcomePage(),
+      ),
+      GoRoute(
+        path: AuthenticationView.kAuthonticationView,
+        name: "Authontication",
+        builder: (context, state) => const AuthenticationView(),
       ),
       GoRoute(
         path: FruitDetailsView.kFruitDetailsView,
