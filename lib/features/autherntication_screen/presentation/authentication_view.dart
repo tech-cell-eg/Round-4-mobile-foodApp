@@ -53,7 +53,7 @@ class AuthenticationView extends StatelessWidget {
                     ),
                     CustomTextField(hintText: "password"),
                     const SizedBox(height: 16),
-                    CustomBotton(text: 'Let\'s Continue'),
+                    CustomButton(text: 'Start Ordering'),
                   ],
                 ),
               ),
