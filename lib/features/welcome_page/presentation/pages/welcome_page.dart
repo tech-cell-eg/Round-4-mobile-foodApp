@@ -49,7 +49,7 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 50),
-                  CustomBotton(text: 'Let’s Continue'),
+                  CustomButton(text: 'Let’s Continue'),
                 ],
               ),
             ),

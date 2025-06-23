@@ -4,15 +4,13 @@ import 'package:fruit_hub/features/welcome_page/presentation/pages/welcome_page.
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
-  static const kHomeView = '/';
+  static const kSplashView = '/';
 
   static final router = GoRouter(
     routes: [
-      // GoRoute(
-      //   path: kHomeView,
-      //   builder: (context, state) => const HomeView(),
-      // ),
-      GoRoute(path: kHomeView, builder: (context, state) => const SplashPage()),
+      GoRoute(
+          path: kSplashView,
+          builder: (context, state) => const SplashPage()),
       GoRoute(
         path: WelcomePage.kWelcomeView,
         name: "welcome",
