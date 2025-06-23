@@ -50,12 +50,13 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 50),
-                  CustomBotton(
+                  CustomButton(
                     text: 'Let’s Continue',
                     ontap: () {
                       context.goNamed('Authontication');
                     },
                   ),
+                  CustomButton(text: 'Let’s Continue'),
                 ],
               ),
             ),

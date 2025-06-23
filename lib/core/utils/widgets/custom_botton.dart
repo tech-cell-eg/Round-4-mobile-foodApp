@@ -3,14 +3,14 @@ import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 
 // ignore: must_be_immutable
-class CustomBotton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String text;
   Color backGroundColor;
   Color fontColor;
   double width;
   double height;
   VoidCallback? ontap;
-  CustomBotton({
+  CustomButton({
     super.key,
     this.ontap,
     required this.text,
