@@ -7,4 +7,5 @@ abstract class AppImages
   static const String fruitBasket2 = "${basePath}fruit_basket_2.png";
   static const String shadowFruit1 = "${basePath}shadow_fruit_1.svg";
   static const String shadowFruit2 = "${basePath}shadow_fruit_2.svg";
+  static const String food = "${basePath}food.png";
 }
