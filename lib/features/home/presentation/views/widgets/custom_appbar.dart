@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({super.key});
@@ -14,13 +15,13 @@ class CustomAppbar extends StatelessWidget {
         IconButton(
           icon: SvgPicture.asset(AppIcons.drawerIcon),
           onPressed: () {
-            Scaffold.of(context).openDrawer();
+            context.pushNamed('love');
           },
         ),
         IconButton(
           icon: Icon(Icons.shopping_basket, color: AppColors.orangeColor),
           onPressed: () {
-            Scaffold.of(context).openDrawer();
+            context.pushNamed('basket');
           },
         ),
       ],
