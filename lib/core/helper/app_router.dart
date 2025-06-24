@@ -1,10 +1,12 @@
 import 'package:fruit_hub/features/autherntication_screen/presentation/authentication_view.dart';
+import 'package:fruit_hub/features/autherntication_screen/presentation/registration_view.dart';
+import 'package:fruit_hub/features/basket/presentation/views/my_basket_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
+import 'package:fruit_hub/features/love_screen/presentation/views/love_view.dart';
 import 'package:fruit_hub/features/splash_screen/presentation/pages/splash_view.dart';
 import 'package:fruit_hub/features/welcome_screen/presentation/pages/welcome_view.dart';
 import 'package:go_router/go_router.dart';
-
 
 abstract class AppRouter {
   static const kSplashView = '/';
@@ -26,6 +28,11 @@ abstract class AppRouter {
         builder: (context, state) => const AuthenticationView(),
       ),
       GoRoute(
+        path: RegistrationView.kRegistrationView,
+        name: "registration",
+        builder: (context, state) => const RegistrationView(),
+      ),
+      GoRoute(
         path: FruitDetailsView.kFruitDetailsView,
         name: "fruitDetails",
         builder: (context, state) => const FruitDetailsView(),
@@ -34,6 +41,16 @@ abstract class AppRouter {
         path: HomeView.kHomeView,
         name: "home",
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: MyBasketView.kBasketView,
+        name: "basket",
+        builder: (context, state) => const MyBasketView(),
+      ),
+      GoRoute(
+        path: LoveView.kLoveView,
+        name: "love",
+        builder: (context, state) => const LoveView(),
       ),
     ],
   );

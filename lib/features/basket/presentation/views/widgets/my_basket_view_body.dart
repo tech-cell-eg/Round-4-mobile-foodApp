@@ -139,102 +139,138 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                 .validate()) {
                                               showModalBottomSheet(
                                                 context: context,
-                                                backgroundColor: Colors.transparent,
-                                                barrierColor: Colors.black.withAlpha(150),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                barrierColor: Colors.black
+                                                    .withAlpha(150),
                                                 builder:
-                                                    (context) =>
-                                                        CustomBottomSheet(
-                                                          height: 700,
-                                                          children: [
-                                                            Padding(
-                                                              padding: const EdgeInsets.symmetric(
+                                                    (
+                                                      context,
+                                                    ) => CustomBottomSheet(
+                                                      height: 700,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets.symmetric(
                                                                 horizontal: 18,
                                                               ),
-                                                              child: Column(
-                                                                crossAxisAlignment:
-                                                                CrossAxisAlignment.start,
-                                                                children: [
-                                                                  Text(
-                                                                    'Card Holders Name',
-                                                                    style: AppTextStyles.textStyle20,
-                                                                  ),
-                                                                  const SizedBox(height: 18),
-                                                                  CustomTextField(
-                                                                    hintText:
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Card Holders Name',
+                                                                style:
+                                                                    AppTextStyles
+                                                                        .textStyle20,
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 18,
+                                                              ),
+                                                              CustomTextField(
+                                                                hintText:
                                                                     'Adolphus Chris',
-                                                                    validator: RequiredValidator(),
-                                                                  ),
-                                                                ],
+                                                                validator:
+                                                                    RequiredValidator(),
                                                               ),
-                                                            ),
-                                                            const SizedBox(height: 24),
-                                                            Padding(
-                                                              padding: const EdgeInsets.symmetric(
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 24,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets.symmetric(
                                                                 horizontal: 18,
                                                               ),
-                                                              child: Column(
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                'Card Number',
+                                                                style:
+                                                                    AppTextStyles
+                                                                        .textStyle20,
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 18,
+                                                              ),
+                                                              CustomTextField(
+                                                                hintText:
+                                                                    '1234 5678 9012 1314',
+                                                                validator:
+                                                                    PhoneValidator(),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 24,
+                                                        ),
+                                                        Expanded(
+                                                          child: Row(
+                                                            children: [
+                                                              Column(
                                                                 crossAxisAlignment:
-                                                                CrossAxisAlignment.start,
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
                                                                   Text(
-                                                                    'Card Number',
-                                                                    style: AppTextStyles.textStyle20,
+                                                                    'Date',
+                                                                    style:
+                                                                        AppTextStyles
+                                                                            .textStyle20,
                                                                   ),
-                                                                  const SizedBox(height: 18),
-                                                                  CustomTextField(
-                                                                    hintText: '1234 5678 9012 1314',
-                                                                    validator: PhoneValidator(),
+                                                                  const SizedBox(
+                                                                    height: 18,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 134,
+                                                                    height: 56,
+                                                                    child: CustomTextField(
+                                                                      hintText:
+                                                                          '10/30',
+                                                                      validator:
+                                                                          PhoneValidator(),
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
-                                                            ),
-                                                            const SizedBox(height: 24),
-                                                            Expanded(
-                                                              child: Row(
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
                                                                 children: [
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                    CrossAxisAlignment.start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Date',
-                                                                        style: AppTextStyles.textStyle20,
-                                                                      ),
-                                                                      const SizedBox(height: 18),
-                                                                      SizedBox(
-                                                                        width: 134,
-                                                                        height: 56,
-                                                                        child: CustomTextField(
-                                                                          hintText: '10/30',
-                                                                          validator: PhoneValidator(),
-                                                                        ),
-                                                                      ),
-                                                                    ],
+                                                                  Text(
+                                                                    'CCV',
+                                                                    style:
+                                                                        AppTextStyles
+                                                                            .textStyle20,
                                                                   ),
-                                                                  Column(
-                                                                    crossAxisAlignment:
-                                                                    CrossAxisAlignment.start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'CCV',
-                                                                        style: AppTextStyles.textStyle20,
-                                                                      ),
-                                                                      const SizedBox(height: 18),
-                                                                      SizedBox(
-                                                                        width: 134,
-                                                                        height: 56,
-                                                                        child: CustomTextField(
-                                                                          hintText: '123',
-                                                                          validator: PhoneValidator(),
-                                                                        ),
-                                                                      ),
-                                                                    ],
+                                                                  const SizedBox(
+                                                                    height: 18,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 134,
+                                                                    height: 56,
+                                                                    child: CustomTextField(
+                                                                      hintText:
+                                                                          '123',
+                                                                      validator:
+                                                                          PhoneValidator(),
+                                                                    ),
                                                                   ),
                                                                 ],
                                                               ),
-                                                            )
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
+                                                      ],
+                                                    ),
                                               );
                                             }
                                           },

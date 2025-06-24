@@ -43,7 +43,10 @@ class AuthenticationView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CustomTextField(hintText: "username", validator: RequiredValidator(),),
+                    CustomTextField(
+                      hintText: "username",
+                      validator: RequiredValidator(),
+                    ),
                     const SizedBox(height: 16),
                     Text(
                       'Enter your password',
@@ -53,13 +56,35 @@ class AuthenticationView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CustomTextField(hintText: "password", validator: PasswordValidator(),),
+                    CustomTextField(
+                      hintText: "password",
+                      validator: PasswordValidator(),
+                    ),
                     const SizedBox(height: 16),
                     CustomButton(
                       text: 'Start Ordering',
                       ontap: () {
                         context.goNamed('home');
                       },
+                    ),
+                    const SizedBox(height: 16),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          // Replace 'registration' with your actual registration route name
+                          context.goNamed('registration');
+                        },
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontFamily: AppTextStyles.fontFamily,
+                            fontSize: AppTextStyles.textStyle16.fontSize,
+                            color: AppColors.orangeColor,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

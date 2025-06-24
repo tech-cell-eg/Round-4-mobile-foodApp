@@ -4,11 +4,12 @@ import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/go_back_icon.dart';
 // ignore: unused_import
 import 'package:fruit_hub/features/basket/presentation/views/widgets/custom_bottom_sheet.dart';
-import 'package:fruit_hub/features/basket/presentation/views/widgets/my_basket_view_body.dart';
+import 'package:fruit_hub/features/love_screen/presentation/widgets/love_view_body.dart';
+import 'package:go_router/go_router.dart';
 
-class MyBasketView extends StatelessWidget {
-  const MyBasketView({super.key});
-  static final String kBasketView = "/basket";
+class LoveView extends StatelessWidget {
+  const LoveView({super.key});
+  static final String kLoveView = "/love";
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +26,22 @@ class MyBasketView extends StatelessWidget {
                 GoBackIcon(),
                 const SizedBox(width: 70),
                 Text(
-                  'My Basket',
+                  'Love page',
                   style: AppTextStyles.textStyle24.copyWith(
                     color: AppColors.whiteColor,
+                  ),
+                ),
+                Spacer(flex: 1),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.shopping_basket,
+                      color: AppColors.whiteColor,
+                    ),
+                    onPressed: () {
+                      context.pushNamed('basket');
+                    },
                   ),
                 ),
               ],
@@ -35,7 +49,7 @@ class MyBasketView extends StatelessWidget {
           ),
         ),
       ),
-      body: MyBasketViewBody(),
+      body: LoveViewBody(),
     );
   }
 }

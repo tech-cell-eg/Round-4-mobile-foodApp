@@ -3,6 +3,7 @@ import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 
+// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   final AppValidator validator;
   final String hintText;
