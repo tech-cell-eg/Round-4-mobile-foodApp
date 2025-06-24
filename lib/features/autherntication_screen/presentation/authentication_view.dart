@@ -4,6 +4,7 @@ import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
+import 'package:go_router/go_router.dart';
 
 class AuthenticationView extends StatelessWidget {
   const AuthenticationView({super.key});
@@ -53,7 +54,12 @@ class AuthenticationView extends StatelessWidget {
                     ),
                     CustomTextField(hintText: "password"),
                     const SizedBox(height: 16),
-                    CustomButton(text: 'Start Ordering'),
+                    CustomButton(
+                      text: 'Start Ordering',
+                      ontap: () {
+                        context.goNamed('home');
+                      },
+                    ),
                   ],
                 ),
               ),

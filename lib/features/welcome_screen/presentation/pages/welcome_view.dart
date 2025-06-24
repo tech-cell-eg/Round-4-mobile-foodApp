@@ -56,7 +56,6 @@ class WelcomePage extends StatelessWidget {
                       context.goNamed('Authontication');
                     },
                   ),
-                  CustomButton(text: 'Let’s Continue'),
                 ],
               ),
             ),

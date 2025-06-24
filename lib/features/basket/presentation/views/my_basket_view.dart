@@ -4,8 +4,6 @@ import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/go_back_icon.dart';
 import 'package:fruit_hub/features/basket/presentation/views/widgets/my_basket_view_body.dart';
 
-import '../../../../core/utils/app_icons.dart';
-
 class MyBasketView extends StatelessWidget {
   const MyBasketView({super.key});
 
