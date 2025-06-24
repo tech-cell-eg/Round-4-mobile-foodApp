@@ -4,6 +4,7 @@ import 'package:fruit_hub/core/helper/app_router.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
+import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,6 +12,8 @@ import '../../../../../core/utils/app_images.dart';
 
 class OrderCompleteViewBody extends StatelessWidget {
   const OrderCompleteViewBody({super.key});
+
+  static final String kOrderComplete = "/completeOrder";
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class OrderCompleteViewBody extends StatelessWidget {
             width: AppResponsive.width(context, value: 181),
             height: AppResponsive.height(context, value: 56),
             ontap: () {
-              //GoRouter.of(context).pushReplacement();
+              GoRouter.of(context).pushReplacement(HomeView.kHomeView);
             },
           ),
         ],

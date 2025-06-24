@@ -1,10 +1,13 @@
 import 'package:fruit_hub/features/autherntication_screen/presentation/authentication_view.dart';
+import 'package:fruit_hub/features/basket/presentation/views/widgets/my_basket_view_body.dart';
+import 'package:fruit_hub/features/basket/presentation/views/widgets/order_complete_view_body.dart';
 import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
 import 'package:fruit_hub/features/splash_screen/presentation/pages/splash_view.dart';
 import 'package:fruit_hub/features/welcome_screen/presentation/pages/welcome_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/basket/presentation/views/my_basket_view.dart';
 import '../../features/basket/presentation/views/order_complete_view.dart';
 
 
@@ -15,7 +18,7 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: kSplashView,
-        builder: (context, state) => const OrderCompleteView(),
+        builder: (context, state) => const MyBasketView(),
       ),
       GoRoute(
         path: WelcomePage.kWelcomeView,
@@ -36,6 +39,11 @@ abstract class AppRouter {
         path: HomeView.kHomeView,
         name: "home",
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: OrderCompleteViewBody.kOrderComplete,
+        name: "complete order",
+        builder: (context, state) => const OrderCompleteView(),
       ),
     ],
   );
