@@ -265,7 +265,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                               height: AppResponsive.height(
                                                                                 context,
                                                                                 value:
-                                                                                    70,
+                                                                                    80,
                                                                               ),
                                                                               child: CustomTextField(
                                                                                 hintText:
@@ -300,7 +300,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                               height: AppResponsive.height(
                                                                                 context,
                                                                                 value:
-                                                                                    70,
+                                                                                    80,
                                                                               ),
                                                                               child: CustomTextField(
                                                                                 hintText:
