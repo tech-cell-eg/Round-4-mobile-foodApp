@@ -1,6 +1,4 @@
 import 'package:fruit_hub/features/autherntication_screen/presentation/authentication_view.dart';
-import 'package:fruit_hub/features/autherntication_screen/presentation/registration_view.dart';
-import 'package:fruit_hub/features/basket/presentation/views/my_basket_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
 import 'package:fruit_hub/features/love_screen/presentation/views/love_view.dart';
@@ -15,7 +13,7 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: kSplashView,
-        builder: (context, state) => const SplashPage(),
+        builder: (context, state) => const MyBasketView(),
       ),
       GoRoute(
         path: WelcomePage.kWelcomeView,
@@ -41,16 +39,6 @@ abstract class AppRouter {
         path: HomeView.kHomeView,
         name: "home",
         builder: (context, state) => const HomeView(),
-      ),
-      GoRoute(
-        path: MyBasketView.kBasketView,
-        name: "basket",
-        builder: (context, state) => const MyBasketView(),
-      ),
-      GoRoute(
-        path: LoveView.kLoveView,
-        name: "love",
-        builder: (context, state) => const LoveView(),
       ),
     ],
   );

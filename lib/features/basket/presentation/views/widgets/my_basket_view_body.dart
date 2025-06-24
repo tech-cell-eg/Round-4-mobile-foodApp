@@ -4,7 +4,8 @@ import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
 import 'package:fruit_hub/features/basket/presentation/views/widgets/custom_bottom_sheet.dart';
-
+import 'package:fruit_hub/features/basket/presentation/views/widgets/order_complete_view_body.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../core/helper/app_validator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
@@ -56,7 +57,6 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                         barrierColor: Colors.black.withAlpha(150),
                         builder:
                             (context) => CustomBottomSheet(
-                              height: 420,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -113,7 +113,12 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                           ontap: () {
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              //GoRouter.of(context).pushReplacement(AppRouter.)
+                                              GoRouter.of(
+                                                context,
+                                              ).pushReplacement(
+                                                OrderCompleteViewBody
+                                                    .kOrderComplete,
+                                              );
                                             }
                                           },
                                           width: AppResponsive.width(
@@ -139,6 +144,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                 .validate()) {
                                               showModalBottomSheet(
                                                 context: context,
+                                                isScrollControlled: true,
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 barrierColor: Colors.black
@@ -146,6 +152,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                 builder:
                                                     (
                                                       context,
+
                                                     ) => CustomBottomSheet(
                                                       height: 700,
                                                       children: [
@@ -270,6 +277,187 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                           ),
                                                         ),
                                                       ],
+                                                    ) => SingleChildScrollView(
+                                                      child: ConstrainedBox(
+                                                        constraints: BoxConstraints(
+                                                          maxHeight: AppResponsive.height(context, value: 680)
+                                                        ),
+                                                        child: IntrinsicHeight(
+                                                          child: CustomBottomSheet(
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets.symmetric(
+                                                                      horizontal: 18,
+                                                                    ),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Card Holders Name',
+                                                                      style:
+                                                                          AppTextStyles
+                                                                              .textStyle20,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 18,
+                                                                    ),
+                                                                    CustomTextField(
+                                                                      hintText:
+                                                                          'Adolphus Chris',
+                                                                      validator:
+                                                                          RequiredValidator(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 24,
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets.symmetric(
+                                                                      horizontal: 18,
+                                                                    ),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Card Number',
+                                                                      style:
+                                                                          AppTextStyles
+                                                                              .textStyle20,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 18,
+                                                                    ),
+                                                                    CustomTextField(
+                                                                      hintText:
+                                                                          '1234 5678 9012 1314',
+                                                                      validator:
+                                                                          PhoneValidator(),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 24,
+                                                              ),
+                                                              Expanded(
+                                                                child: Padding(
+                                                                  padding:
+                                                                  const EdgeInsets.symmetric(
+                                                                    horizontal: 18,
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Date',
+                                                                            style:
+                                                                                AppTextStyles
+                                                                                    .textStyle20,
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            height: 18,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width: 134,
+                                                                            height: 56,
+                                                                            child: CustomTextField(
+                                                                              hintText:
+                                                                                  '10/30',
+                                                                              validator:
+                                                                                  PhoneValidator(),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment
+                                                                                .start,
+                                                                        children: [
+                                                                          Text(
+                                                                            'CCV',
+                                                                            style:
+                                                                                AppTextStyles
+                                                                                    .textStyle20,
+                                                                          ),
+                                                                          const SizedBox(
+                                                                            height: 18,
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width: 134,
+                                                                            height: 56,
+                                                                            child: CustomTextField(
+                                                                              hintText:
+                                                                                  '123',
+                                                                              validator:
+                                                                                  PhoneValidator(),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 24,
+                                                              ),
+                                                              Container(
+                                                                width: double.infinity,
+                                                                height: AppResponsive.height(
+                                                                  context,
+                                                                  value: 120,
+                                                                ),
+                                                                decoration: BoxDecoration(
+                                                                  color: AppColors.orangeColor,
+                                                                  borderRadius: BorderRadius.only(topRight: Radius.circular(24), topLeft: Radius.circular(24)),
+                                                                ),
+                                                                child: Center(
+                                                                  child: CustomButton(
+                                                                    text: 'Complete Order',
+                                                                    ontap: () {
+                                                                      if (_formKey.currentState!
+                                                                          .validate()) {
+                                                                        GoRouter.of(
+                                                                          context,
+                                                                        ).pushReplacement(
+                                                                          OrderCompleteViewBody
+                                                                              .kOrderComplete,
+                                                                        );
+                                                                      }
+                                                                    },
+                                                                    fontColor: AppColors.orangeColor,
+                                                                    backGroundColor: AppColors.whiteColor,
+                                                                    width: AppResponsive.width(
+                                                                      context,
+                                                                      value: 140,
+                                                                    ),
+                                                                    height: AppResponsive.height(
+                                                                      context,
+                                                                      value: 56,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ),
                                               );
                                             }

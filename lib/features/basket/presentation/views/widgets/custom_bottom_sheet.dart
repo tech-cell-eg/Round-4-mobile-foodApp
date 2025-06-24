@@ -20,12 +20,10 @@ class CustomBottomSheet extends StatelessWidget {
   });
 
   final List<Widget> children;
-  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         GestureDetector(
           onTap: () {
@@ -40,7 +38,6 @@ class CustomBottomSheet extends StatelessWidget {
         const SizedBox(height: 16),
         Expanded(
           child: Container(
-            height: AppResponsive.height(context, value: height),
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
