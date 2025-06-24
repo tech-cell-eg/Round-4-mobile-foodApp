@@ -20,6 +20,7 @@ class ProductDetailsViewBody extends StatelessWidget {
         SliverAppBar(
           title: GoBackIcon(),
           pinned: true,
+          automaticallyImplyLeading: false,
           backgroundColor: AppColors.orangeColor,
           expandedHeight: 300,
           flexibleSpace: FlexibleSpaceBar(
@@ -102,7 +103,11 @@ class ProductDetailsViewBody extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: AppResponsive.width(context, value: 16)),
-                    CustomButton(text: 'Add to basket', width: AppResponsive.width(context, value: 219), height: AppResponsive.height(context, value: 56),)
+                    CustomButton(
+                      text: 'Add to basket',
+                      width: AppResponsive.width(context, value: 219),
+                      height: AppResponsive.height(context, value: 56),
+                    ),
                   ],
                 ),
               ],
@@ -113,8 +118,3 @@ class ProductDetailsViewBody extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

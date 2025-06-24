@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:go_router/go_router.dart';
 
 class RecommendedCombo extends StatelessWidget {
   const RecommendedCombo({super.key});
@@ -9,7 +10,9 @@ class RecommendedCombo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        context.pushNamed('fruitDetails');
+      },
       child: Padding(
         padding: const EdgeInsets.only(right: 8),
         child: Container(
