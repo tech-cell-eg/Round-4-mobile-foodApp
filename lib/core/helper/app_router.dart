@@ -5,6 +5,8 @@ import 'package:fruit_hub/features/splash_screen/presentation/pages/splash_view.
 import 'package:fruit_hub/features/welcome_screen/presentation/pages/welcome_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/basket/presentation/views/order_complete_view.dart';
+
 
 abstract class AppRouter {
   static const kSplashView = '/';
@@ -13,7 +15,7 @@ abstract class AppRouter {
     routes: [
       GoRoute(
         path: kSplashView,
-        builder: (context, state) => const SplashPage(),
+        builder: (context, state) => const OrderCompleteView(),
       ),
       GoRoute(
         path: WelcomePage.kWelcomeView,
