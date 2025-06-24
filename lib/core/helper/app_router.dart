@@ -5,6 +5,7 @@ import 'package:fruit_hub/features/splash_screen/presentation/pages/splash_view.
 import 'package:fruit_hub/features/welcome_screen/presentation/pages/welcome_view.dart';
 import 'package:go_router/go_router.dart';
 
+
 abstract class AppRouter {
   static const kSplashView = '/';
 

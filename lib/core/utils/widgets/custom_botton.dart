@@ -4,6 +4,7 @@ import 'package:fruit_hub/core/utils/app_text_styles.dart';
 
 // ignore: must_be_immutable
 class CustomButton extends StatelessWidget {
+  BoxBorder? border;
   final String text;
   Color backGroundColor;
   Color fontColor;
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     this.width = 330,
     this.height = 56,
     this.fontColor = AppColors.whiteColor,
+    this.border,
   });
 
   @override
@@ -26,6 +28,7 @@ class CustomButton extends StatelessWidget {
       onTap: ontap,
       child: Container(
         decoration: BoxDecoration(
+          border: border,
           color: backGroundColor,
           borderRadius: BorderRadius.circular(8),
         ),

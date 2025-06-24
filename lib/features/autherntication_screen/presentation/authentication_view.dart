@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
@@ -42,7 +43,7 @@ class AuthenticationView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CustomTextField(hintText: "username"),
+                    CustomTextField(hintText: "username", validator: RequiredValidator(),),
                     const SizedBox(height: 16),
                     Text(
                       'Enter your password',
@@ -52,7 +53,7 @@ class AuthenticationView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CustomTextField(hintText: "password"),
+                    CustomTextField(hintText: "password", validator: PasswordValidator(),),
                     const SizedBox(height: 16),
                     CustomButton(
                       text: 'Start Ordering',
