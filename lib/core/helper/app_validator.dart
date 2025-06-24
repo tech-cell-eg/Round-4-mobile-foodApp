@@ -63,3 +63,13 @@ class RequiredValidator extends AppValidator {
     return null;
   }
 }
+
+class CVVValidator extends AppValidator {
+  @override
+  String? validate(String? value) {
+    if (value == null || value.trim().isEmpty) return 'CVV is required';
+    final cvvRegex = RegExp(r'^\d{3,4}$');
+    if (!cvvRegex.hasMatch(value)) return 'Enter a valid CVV';
+    return null;
+  }
+}
