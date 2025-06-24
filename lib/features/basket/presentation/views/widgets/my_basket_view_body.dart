@@ -23,40 +23,40 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24),
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) => CustomFruitItem(),
-                separatorBuilder: (context, index) => MyDivider(),
-                itemCount: 10,
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 24),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.separated(
+              itemBuilder: (context, index) => CustomFruitItem(),
+              separatorBuilder: (context, index) => MyDivider(),
+              itemCount: 10,
             ),
-            Container(
-              padding: EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Text('Total', style: AppTextStyles.textStyle16),
-                      Text('\$100.00', style: AppTextStyles.textStyle24),
-                    ],
-                  ),
-                  SizedBox(width: AppResponsive.width(context, value: 28)),
-                  CustomButton(
-                    text: 'Checkout',
-                    ontap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        backgroundColor: Colors.transparent,
-                        barrierColor: Colors.black.withAlpha(150),
-                        builder:
-                            (context) => CustomBottomSheet(
+          ),
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text('Total', style: AppTextStyles.textStyle16),
+                    Text('\$100.00', style: AppTextStyles.textStyle24),
+                  ],
+                ),
+                SizedBox(width: AppResponsive.width(context, value: 28)),
+                CustomButton(
+                  text: 'Checkout',
+                  ontap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      barrierColor: Colors.black.withAlpha(150),
+                      builder:
+                          (context) => Form(
+                            key: _formKey,
+                            child: CustomBottomSheet(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -339,7 +339,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                       hintText:
                                                                           '1234 5678 9012 1314',
                                                                       validator:
-                                                                          PhoneValidator(),
+                                                                          IntegerValidator(),
                                                                     ),
                                                                   ],
                                                                 ),
@@ -379,7 +379,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                               hintText:
                                                                                   '10/30',
                                                                               validator:
-                                                                                  PhoneValidator(),
+                                                                                  RequiredValidator(),
                                                                             ),
                                                                           ),
                                                                         ],
@@ -405,7 +405,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                               hintText:
                                                                                   '123',
                                                                               validator:
-                                                                                  PhoneValidator(),
+                                                                                  CVVValidator(),
                                                                             ),
                                                                           ),
                                                                         ],
@@ -483,16 +483,16 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                 ),
                               ],
                             ),
-                      );
-                    },
-                    width: AppResponsive.width(context, value: 199),
-                    height: AppResponsive.height(context, value: 56),
-                  ),
-                ],
-              ),
+                          ),
+                    );
+                  },
+                  width: AppResponsive.width(context, value: 199),
+                  height: AppResponsive.height(context, value: 56),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
