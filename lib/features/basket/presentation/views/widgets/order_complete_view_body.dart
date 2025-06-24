@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/helper/app_responsive.dart';
-import 'package:fruit_hub/core/helper/app_router.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
@@ -12,8 +11,6 @@ import '../../../../../core/utils/app_images.dart';
 
 class OrderCompleteViewBody extends StatelessWidget {
   const OrderCompleteViewBody({super.key});
-
-  static final String kOrderComplete = "/completeOrder";
 
   @override
   Widget build(BuildContext context) {

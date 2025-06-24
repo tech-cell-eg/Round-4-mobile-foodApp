@@ -3,8 +3,8 @@ import 'package:fruit_hub/core/helper/app_responsive.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
+import 'package:fruit_hub/features/basket/presentation/views/order_complete_view.dart';
 import 'package:fruit_hub/features/basket/presentation/views/widgets/custom_bottom_sheet.dart';
-import 'package:fruit_hub/features/basket/presentation/views/widgets/order_complete_view_body.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/helper/app_validator.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -116,7 +116,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                               GoRouter.of(
                                                 context,
                                               ).pushReplacement(
-                                                OrderCompleteViewBody
+                                                OrderCompleteView
                                                     .kOrderComplete,
                                               );
                                             }
@@ -155,7 +155,11 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                     ) => SingleChildScrollView(
                                                       child: ConstrainedBox(
                                                         constraints: BoxConstraints(
-                                                          maxHeight: AppResponsive.height(context, value: 680)
+                                                          maxHeight:
+                                                              AppResponsive.height(
+                                                                context,
+                                                                value: 700,
+                                                              ),
                                                         ),
                                                         child: IntrinsicHeight(
                                                           child: CustomBottomSheet(
@@ -163,7 +167,8 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets.symmetric(
-                                                                      horizontal: 18,
+                                                                      horizontal:
+                                                                          18,
                                                                     ),
                                                                 child: Column(
                                                                   crossAxisAlignment:
@@ -177,7 +182,8 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                               .textStyle20,
                                                                     ),
                                                                     const SizedBox(
-                                                                      height: 18,
+                                                                      height:
+                                                                          18,
                                                                     ),
                                                                     CustomTextField(
                                                                       hintText:
@@ -194,7 +200,8 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                               Padding(
                                                                 padding:
                                                                     const EdgeInsets.symmetric(
-                                                                      horizontal: 18,
+                                                                      horizontal:
+                                                                          18,
                                                                     ),
                                                                 child: Column(
                                                                   crossAxisAlignment:
@@ -208,7 +215,8 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                               .textStyle20,
                                                                     ),
                                                                     const SizedBox(
-                                                                      height: 18,
+                                                                      height:
+                                                                          18,
                                                                     ),
                                                                     CustomTextField(
                                                                       hintText:
@@ -220,115 +228,158 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                                                                 ),
                                                               ),
                                                               const SizedBox(
-                                                                height: 24,
+                                                                height: 20,
                                                               ),
                                                               Expanded(
                                                                 child: Padding(
                                                                   padding:
-                                                                  const EdgeInsets.symmetric(
-                                                                    horizontal: 18,
-                                                                  ),
+                                                                      const EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            18,
+                                                                      ),
                                                                   child: Row(
                                                                     mainAxisAlignment:
                                                                         MainAxisAlignment
                                                                             .spaceBetween,
                                                                     children: [
-                                                                      Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Date',
-                                                                            style:
-                                                                                AppTextStyles
-                                                                                    .textStyle20,
-                                                                          ),
-                                                                          const SizedBox(
-                                                                            height: 18,
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width: 134,
-                                                                            height: 56,
-                                                                            child: CustomTextField(
-                                                                              hintText:
-                                                                                  '10/30',
-                                                                              validator:
-                                                                                  RequiredValidator(),
+                                                                      Expanded(
+                                                                        child: Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'Date',
+                                                                              style:
+                                                                                  AppTextStyles.textStyle20,
                                                                             ),
-                                                                          ),
-                                                                        ],
+                                                                            const SizedBox(
+                                                                              height:
+                                                                                  18,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: AppResponsive.width(
+                                                                                context,
+                                                                                value:
+                                                                                    134,
+                                                                              ),
+                                                                              height: AppResponsive.height(
+                                                                                context,
+                                                                                value:
+                                                                                    70,
+                                                                              ),
+                                                                              child: CustomTextField(
+                                                                                hintText:
+                                                                                    '10/30',
+                                                                                validator:
+                                                                                    RequiredValidator(),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
-                                                                      Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment
-                                                                                .start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'CCV',
-                                                                            style:
-                                                                                AppTextStyles
-                                                                                    .textStyle20,
-                                                                          ),
-                                                                          const SizedBox(
-                                                                            height: 18,
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width: 134,
-                                                                            height: 56,
-                                                                            child: CustomTextField(
-                                                                              hintText:
-                                                                                  '123',
-                                                                              validator:
-                                                                                  CVVValidator(),
+                                                                      Expanded(
+                                                                        child: Column(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              'CCV',
+                                                                              style:
+                                                                                  AppTextStyles.textStyle20,
                                                                             ),
-                                                                          ),
-                                                                        ],
+                                                                            const SizedBox(
+                                                                              height:
+                                                                                  18,
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: AppResponsive.width(
+                                                                                context,
+                                                                                value:
+                                                                                    134,
+                                                                              ),
+                                                                              height: AppResponsive.height(
+                                                                                context,
+                                                                                value:
+                                                                                    70,
+                                                                              ),
+                                                                              child: CustomTextField(
+                                                                                hintText:
+                                                                                    '123',
+                                                                                validator:
+                                                                                    CVVValidator(),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),
                                                                 ),
                                                               ),
                                                               const SizedBox(
-                                                                height: 24,
+                                                                height: 20,
                                                               ),
                                                               Container(
-                                                                width: double.infinity,
-                                                                height: AppResponsive.height(
-                                                                  context,
-                                                                  value: 120,
-                                                                ),
+                                                                width:
+                                                                    double
+                                                                        .infinity,
+                                                                height:
+                                                                    AppResponsive.height(
+                                                                      context,
+                                                                      value:
+                                                                          100,
+                                                                    ),
                                                                 decoration: BoxDecoration(
-                                                                  color: AppColors.orangeColor,
-                                                                  borderRadius: BorderRadius.only(topRight: Radius.circular(24), topLeft: Radius.circular(24)),
+                                                                  color:
+                                                                      AppColors
+                                                                          .orangeColor,
+                                                                  borderRadius: BorderRadius.only(
+                                                                    topRight:
+                                                                        Radius.circular(
+                                                                          24,
+                                                                        ),
+                                                                    topLeft:
+                                                                        Radius.circular(
+                                                                          24,
+                                                                        ),
+                                                                  ),
                                                                 ),
                                                                 child: Center(
                                                                   child: CustomButton(
-                                                                    text: 'Complete Order',
+                                                                    text:
+                                                                        'Complete Order',
                                                                     ontap: () {
-                                                                      if (_formKey.currentState!
+                                                                      if (_formKey
+                                                                          .currentState!
                                                                           .validate()) {
                                                                         GoRouter.of(
                                                                           context,
                                                                         ).pushReplacement(
-                                                                          OrderCompleteViewBody
+                                                                          OrderCompleteView
                                                                               .kOrderComplete,
                                                                         );
                                                                       }
                                                                     },
-                                                                    fontColor: AppColors.orangeColor,
-                                                                    backGroundColor: AppColors.whiteColor,
+                                                                    fontColor:
+                                                                        AppColors
+                                                                            .orangeColor,
+                                                                    backGroundColor:
+                                                                        AppColors
+                                                                            .whiteColor,
                                                                     width: AppResponsive.width(
                                                                       context,
-                                                                      value: 140,
+                                                                      value:
+                                                                          140,
                                                                     ),
-                                                                    height: AppResponsive.height(
-                                                                      context,
-                                                                      value: 56,
-                                                                    ),
+                                                                    height:
+                                                                        AppResponsive.height(
+                                                                          context,
+                                                                          value:
+                                                                              56,
+                                                                        ),
                                                                   ),
                                                                 ),
-                                                              )
+                                                              ),
                                                             ],
                                                           ),
                                                         ),

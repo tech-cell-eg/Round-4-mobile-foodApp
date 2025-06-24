@@ -6,6 +6,7 @@ import 'package:fruit_hub/features/basket/presentation/views/widgets/my_basket_v
 
 class MyBasketView extends StatelessWidget {
   const MyBasketView({super.key});
+  static final String kMyBasketView = "/basket";
 
   @override
   Widget build(BuildContext context) {

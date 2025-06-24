@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fruit_hub/core/helper/app_responsive.dart';
-import 'package:fruit_hub/core/helper/app_router.dart';
-import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
-import 'package:fruit_hub/core/utils/app_text_styles.dart';
-import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
-import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomBottomSheet extends StatelessWidget {
   const CustomBottomSheet({super.key, required this.children});
@@ -42,9 +35,7 @@ class CustomBottomSheet extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.only(top: 24),
-              child: Column(
-                children: children
-              ),
+              child: Column(children: children),
             ),
           ),
         ),

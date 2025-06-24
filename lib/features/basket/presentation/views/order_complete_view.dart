@@ -3,11 +3,10 @@ import 'package:fruit_hub/features/basket/presentation/views/widgets/order_compl
 
 class OrderCompleteView extends StatelessWidget {
   const OrderCompleteView({super.key});
+  static final String kOrderComplete = "/completeOrder";
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: OrderCompleteViewBody(),
-    );
+    return const Scaffold(body: OrderCompleteViewBody());
   }
 }
