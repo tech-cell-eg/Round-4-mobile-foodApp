@@ -1,8 +1,5 @@
 import 'package:fruit_hub/features/autherntication_screen/presentation/authentication_view.dart';
-<<<<<<< HEAD
-=======
 import 'package:fruit_hub/features/autherntication_screen/presentation/registration_view.dart';
->>>>>>> b209684bd6389f8449c0a6aa9125821152f65f7d
 import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
 import 'package:fruit_hub/features/love_screen/presentation/views/love_view.dart';

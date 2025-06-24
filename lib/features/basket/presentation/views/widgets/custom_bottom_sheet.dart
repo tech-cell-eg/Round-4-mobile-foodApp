@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruit_hub/core/helper/app_responsive.dart';
@@ -13,11 +11,7 @@ import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomBottomSheet extends StatelessWidget {
-  const CustomBottomSheet({
-    super.key,
-    required this.children,
-    required this.height,
-  });
+  const CustomBottomSheet({super.key, required this.children});
 
   final List<Widget> children;
 
@@ -47,8 +41,10 @@ class CustomBottomSheet extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 28),
-              child: Column(children: children),
+              padding: const EdgeInsets.only(top: 24),
+              child: Column(
+                children: children
+              ),
             ),
           ),
         ),
