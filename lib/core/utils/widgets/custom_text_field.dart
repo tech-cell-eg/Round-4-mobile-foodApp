@@ -5,7 +5,7 @@ import 'package:fruit_hub/core/utils/app_text_styles.dart';
 
 // ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
-  final AppValidator validator;
+  final AppValidator? validator;
   final String hintText;
   Function(String)? onsubment;
   bool? obscureText;
@@ -15,14 +15,14 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     this.onsubment,
     this.obscureText = false,
-    required this.validator,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText!,
-      validator: validator.validate,
+      validator: validator?.validate,
       onChanged: onsubment,
       decoration: InputDecoration(
         filled: true,
