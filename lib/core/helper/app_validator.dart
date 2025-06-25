@@ -3,7 +3,6 @@ abstract class AppValidator {
 }
 
 class EmailValidator extends AppValidator {
-
   @override
   String? validate(String? value) {
     if (value == null || value.isEmpty) return 'Email is required';
@@ -20,7 +19,7 @@ class PasswordValidator extends AppValidator {
   String? validate(String? value) {
     if (value == null || value.isEmpty) return 'Password is required';
 
-    if ( value.isNotEmpty && confirm != null && value != value) {
+    if (value.isNotEmpty && confirm != null && value != value) {
       return 'Passwords do not match';
     }
 
@@ -32,20 +31,27 @@ class PasswordValidator extends AppValidator {
 }
 
 class PhoneValidator extends AppValidator {
-
-
   @override
   String? validate(String? value) {
     if (value == null || value.isEmpty) return 'Phone number is required';
-    final phoneRegex = RegExp(r'^\+?[0-9]{7,15}$');
-    if (!phoneRegex.hasMatch(value)) return 'Enter a valid phone number';
+
+    // Allow only digits (0-9) and optional '+' prefix
+    final phoneRegex = RegExp(r'^\+?[0-9]+$');
+    if (!phoneRegex.hasMatch(value)) {
+      return 'Phone number must contain only numbers';
+    }
+
+    // Ensure length is reasonable (e.g., 7-15 digits)
+    final digitsOnly = value.replaceAll(RegExp(r'[^0-9]'), '');
+    if (digitsOnly.length < 7 || digitsOnly.length > 15) {
+      return 'Phone number must be 7-15 digits long';
+    }
+
     return null;
   }
 }
 
 class IntegerValidator extends AppValidator {
-
-
   @override
   String? validate(String? value) {
     if (value == null || value.isEmpty) return 'This field is required';
@@ -55,8 +61,6 @@ class IntegerValidator extends AppValidator {
 }
 
 class RequiredValidator extends AppValidator {
-
-
   @override
   String? validate(String? value) {
     if (value == null || value.trim().isEmpty) return 'Field is required';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
@@ -78,9 +79,32 @@ class RegistrationView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    CustomTextField(
-                      hintText: "+1234567890",
-                      validator: PhoneValidator(),
+                    TextField(
+                      keyboardType:
+                          TextInputType.number, // Shows numeric keyboard
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9+]')),
+                      ],
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.grayColor,
+                        prefix: SizedBox(width: 20),
+                        contentPadding: EdgeInsets.symmetric(vertical: 16),
+                        hintText: '0122155488',
+                        hintStyle: TextStyle(
+                          fontSize: 20,
+                          fontFamily: AppTextStyles.fontFamily,
+                          color: AppColors.darkGrayColor,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: Colors.white),
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 12),
                     Text(
