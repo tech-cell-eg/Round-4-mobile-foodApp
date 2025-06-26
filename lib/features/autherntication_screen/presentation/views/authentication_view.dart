@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruit_hub/core/cache/cache_data.dart';
+import 'package:fruit_hub/core/cache/cache_helper.dart';
+import 'package:fruit_hub/core/cache/cache_keys.dart';
 import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/network/api_helper.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
@@ -85,9 +87,14 @@ class AuthenticationView extends StatelessWidget {
                           obscureText: true,
                         ),
                         const SizedBox(height: 24),
+
                         BlocConsumer<LoginCubit, LoginState>(
                           listener: (context, state) {
                             if (state is LoginSuccess) {
+                              CacheHelper.saveData(
+                                key: CacheKeys.firstTime,
+                                value: true,
+                              );
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(

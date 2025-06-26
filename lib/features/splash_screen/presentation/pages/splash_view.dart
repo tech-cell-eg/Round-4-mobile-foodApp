@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fruit_hub/core/cache/cache_data.dart';
 import 'package:fruit_hub/core/cache/cache_helper.dart';
 import 'package:fruit_hub/core/cache/cache_keys.dart';
 import 'package:go_router/go_router.dart';
@@ -23,16 +24,17 @@ class _SplashPageState extends State<SplashPage> {
     await CacheHelper.init();
 
     // Add small delay for splash screen
-    await Future.delayed(const Duration(seconds: 2));
-
+    await Future.delayed(const Duration(microseconds: 500));
     if (!mounted) return;
 
-    // Check if user has a valid token
-    final token = CacheHelper.getData(key: CacheKeys.accessToken);
-    if (token != null && token is String && token.isNotEmpty) {
-      context.goNamed('welcome');
-    } else {
-      context.goNamed('home');
+    CacheData.firstTime = CacheHelper.getData(key: CacheKeys.firstTime);
+    if (CacheData.firstTime != null) {
+      CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
+      if (CacheData.accessToken != null) {
+        context.goNamed('home');
+      } else {
+        context.goNamed('welcome');
+      }
     }
   }
 

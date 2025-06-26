@@ -4,4 +4,5 @@ abstract class EndPoints {
   static const String register = '$baseUrl/register';
   static const String login = '$baseUrl/login';
   static const String logout = '$baseUrl/logout';
+  static const String recommendedCombo = '$baseUrl/categories/4/products/';
 }
