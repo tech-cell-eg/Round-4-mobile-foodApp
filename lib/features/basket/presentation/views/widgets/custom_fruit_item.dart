@@ -5,7 +5,11 @@ import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class CustomFruitItem extends StatelessWidget {
-  const CustomFruitItem({super.key});
+  const CustomFruitItem({super.key, required this.fruitName, required this.quantity, required this.price});
+
+  final String fruitName;
+  final int quantity;
+  final double price;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +32,12 @@ class CustomFruitItem extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text('Quinoa fruit salad', style: AppTextStyles.textStyle16,),
-              Text('2packs', style: AppTextStyles.textStyle14.copyWith(color: AppColors.blackColor),)
+              Text(fruitName, style: AppTextStyles.textStyle16,),
+              Text('$quantity packs', style: AppTextStyles.textStyle14.copyWith(color: AppColors.blackColor),)
             ],
           ),
           Spacer(),
-          Text('\$20.00', style: AppTextStyles.textStyle16),
+          Text('\$ ${price.toStringAsFixed(2)}', style: AppTextStyles.textStyle16),
         ],
       ),
     );
