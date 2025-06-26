@@ -36,6 +36,7 @@ class _SplashPageState extends State<SplashPage> {
         context.goNamed('welcome');
       }
     }
+    ;
   }
 
   @override
