@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fruit_hub/core/cache/cache_helper.dart';
+import 'package:fruit_hub/core/cache/cache_keys.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
@@ -13,9 +15,25 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    _checkAuthStatus();
+  }
+
+  Future<void> _checkAuthStatus() async {
+    // Ensure cache is initialized
+    await CacheHelper.init();
+
+    // Add small delay for splash screen
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return;
+
+    // Check if user has a valid token
+    final token = CacheHelper.getData(key: CacheKeys.accessToken);
+    if (token != null && token is String && token.isNotEmpty) {
+      context.goNamed('home');
+    } else {
       context.goNamed('welcome');
-    });
+    }
   }
 
   @override

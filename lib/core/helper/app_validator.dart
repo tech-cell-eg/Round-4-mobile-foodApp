@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class AppValidator {
   String? validate(String? value);
 }
@@ -25,6 +27,21 @@ class PasswordValidator extends AppValidator {
 
     if (value.length < 6) {
       return 'Password must be at least 6 characters';
+    }
+    return null;
+  }
+}
+
+class ConfirmPasswordValidator extends AppValidator {
+  final TextEditingController passwordController;
+
+  ConfirmPasswordValidator(this.passwordController);
+
+  @override
+  String? validate(String? value) {
+    if (value == null || value.isEmpty) return 'Please confirm your password';
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
     }
     return null;
   }

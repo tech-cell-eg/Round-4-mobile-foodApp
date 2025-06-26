@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub/core/cache/cache_data.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/custom_appbar.dart';
@@ -42,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
                   child: CustomAppbar(),
                 ),
                 Text(
-                  'Hello Tony, What fruit salad combo do you want today?',
+                  'Hello ${CacheData.userName}, What fruit salad combo do you want today?',
                   style: AppTextStyles.textStyle20,
                   maxLines: 2,
                 ),

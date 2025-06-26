@@ -1,5 +1,5 @@
-import 'package:fruit_hub/features/autherntication_screen/presentation/authentication_view.dart';
-import 'package:fruit_hub/features/autherntication_screen/presentation/registration_view.dart';
+import 'package:fruit_hub/features/autherntication_screen/presentation/views/authentication_view.dart';
+import 'package:fruit_hub/features/autherntication_screen/presentation/views/registration_view.dart';
 import 'package:fruit_hub/features/basket/presentation/views/my_basket_view.dart';
 import 'package:fruit_hub/features/basket/presentation/views/order_complete_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
@@ -26,12 +26,12 @@ abstract class AppRouter {
       GoRoute(
         path: AuthenticationView.kAuthonticationView,
         name: "Authontication",
-        builder: (context, state) => const AuthenticationView(),
+        builder: (context, state) => AuthenticationView(),
       ),
       GoRoute(
         path: RegistrationView.kRegistrationView,
         name: "registration",
-        builder: (context, state) => const RegistrationView(),
+        builder: (context, state) => RegistrationView(),
       ),
       GoRoute(
         path: FruitDetailsView.kFruitDetailsView,

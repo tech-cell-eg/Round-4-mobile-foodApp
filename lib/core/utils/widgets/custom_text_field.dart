@@ -3,32 +3,34 @@ import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 
-// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
   final AppValidator? validator;
   final String hintText;
-  Function(String)? onsubment;
-  bool? obscureText;
+  final Function(String)? onsubment;
+  final bool obscureText;
+  final TextEditingController? controller;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.hintText,
     this.onsubment,
     this.obscureText = false,
     this.validator,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: obscureText!,
+      controller: controller,
+      obscureText: obscureText,
       validator: validator?.validate,
       onChanged: onsubment,
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.grayColor,
-        prefix: SizedBox(width: 20),
-        contentPadding: EdgeInsets.symmetric(vertical: 16),
+        prefix: const SizedBox(width: 20),
+        contentPadding: const EdgeInsets.symmetric(vertical: 16),
         hintText: hintText,
         hintStyle: TextStyle(
           fontSize: 20,
@@ -37,11 +39,11 @@ class CustomTextField extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.white),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: const BorderSide(color: Colors.white),
         ),
       ),
     );

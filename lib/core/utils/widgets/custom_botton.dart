@@ -20,6 +20,7 @@ class CustomButton extends StatelessWidget {
     this.height = 56,
     this.fontColor = AppColors.whiteColor,
     this.border,
+    bool? isLoading,
   });
 
   @override
