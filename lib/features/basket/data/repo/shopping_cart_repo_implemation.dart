@@ -8,7 +8,8 @@ import '../models/shopping_cart_model.dart';
 
 class ShoppingCartRepoImplementation implements ShoppingCartRepo {
   // singleton
-  static final ShoppingCartRepoImplementation _instance = ShoppingCartRepoImplementation._internal();
+  static final ShoppingCartRepoImplementation _instance =
+      ShoppingCartRepoImplementation._internal();
   factory ShoppingCartRepoImplementation() => _instance;
   ShoppingCartRepoImplementation._internal();
 
@@ -23,7 +24,9 @@ class ShoppingCartRepoImplementation implements ShoppingCartRepo {
       );
 
       if (response.status) {
-        ShoppingCartModel shoppingCart = ShoppingCartModel.fromJson(response.data);
+        ShoppingCartModel shoppingCart = ShoppingCartModel.fromJson(
+          response.data,
+        );
 
         return Right(shoppingCart.items);
       } else {
