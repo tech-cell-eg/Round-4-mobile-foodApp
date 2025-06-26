@@ -48,18 +48,46 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final response = await _apiHelper.postRequest(
         endPoint: EndPoints.login,
-        data: {'email': login.email, 'password': login.password},
+        data: {
+          'email': login.email,
+          'password': login.password,
+          // Remove 'name' as it's not needed for login request
+        },
       );
 
       if (response.status &&
           response.data['data'] != null &&
-          response.data['data']['token'] != null) {
+          response.data['data']['token'] != null &&
+          response.data['data']['user'] != null) {
         return response;
       } else {
         return ApiResponse(
           status: false,
           statusCode: response.statusCode,
           message: response.data['message'] ?? 'Login failed',
+          data: response.data,
+        );
+      }
+    } catch (e) {
+      return ApiResponse.fromError(e);
+    }
+  }
+
+  @override
+  Future<ApiResponse> logout() async {
+    try {
+      final response = await _apiHelper.postRequest(
+        endPoint: EndPoints.logout,
+        data: {},
+      );
+
+      if (response.status) {
+        return response;
+      } else {
+        return ApiResponse(
+          status: false,
+          statusCode: response.statusCode,
+          message: response.data['message'] ?? 'Logout failed',
           data: response.data,
         );
       }

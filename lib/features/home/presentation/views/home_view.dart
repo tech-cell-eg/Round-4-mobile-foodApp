@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/cache/cache_data.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/home/presentation/views/widgets/app_drawer.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/custom_appbar.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/fruit_card_builder.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/recommended_combo_builder.dart';
@@ -29,6 +30,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const AppDrawer(),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Padding(

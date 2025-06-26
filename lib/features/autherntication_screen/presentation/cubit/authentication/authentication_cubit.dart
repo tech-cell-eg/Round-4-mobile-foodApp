@@ -17,21 +17,14 @@ class LoginCubit extends Cubit<LoginState> {
       final response = await _repository.login(login);
 
       if (response.status) {
-        // Debug print to verify response structure
         print('Login Response: ${response.data}');
-
-        // Extract token and username from response
         final token = response.data['data']['token'] as String;
-        final username = response.data['data']['name'] as String? ?? 'User';
-
-        // Save to cache
+        final userData = response.data['data']['user'];
+        final username = userData['name'] as String;
         await CacheHelper.saveData(key: CacheKeys.accessToken, value: token);
         await CacheHelper.saveData(key: CacheKeys.userName, value: username);
-
-        // Update static cache data
         CacheData.accessToken = token;
         CacheData.userName = username;
-
         emit(LoginSuccess());
       } else {
         final errorMsg = response.data['message'] ?? 'Login failed';

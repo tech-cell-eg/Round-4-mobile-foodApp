@@ -15,7 +15,7 @@ class CustomAppbar extends StatelessWidget {
         IconButton(
           icon: SvgPicture.asset(AppIcons.drawerIcon),
           onPressed: () {
-            context.pushNamed('love');
+            Scaffold.of(context).openDrawer();
           },
         ),
         IconButton(

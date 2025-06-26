@@ -4,23 +4,13 @@ import 'package:fruit_hub/core/cache/cache_helper.dart';
 import 'package:fruit_hub/core/helper/app_router.dart';
 import 'package:fruit_hub/core/network/api_helper.dart';
 import 'package:fruit_hub/features/autherntication_screen/domain/repositories/authentication_repository/auth_repository_impl.dart';
+import 'package:fruit_hub/features/autherntication_screen/domain/usecases/logout.dart';
+import 'package:fruit_hub/features/autherntication_screen/presentation/cubit/logout/logoutcubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
-  runApp(
-    MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(create: (_) => ApiHelper()),
-        RepositoryProvider(
-          create:
-              (context) =>
-                  AuthRepositoryImpl(RepositoryProvider.of<ApiHelper>(context)),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,9 +18,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: AppRouter.router,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create:
+              (context) => AuthCubit(
+                logout: Logout(authRepository: AuthRepositoryImpl(ApiHelper())),
+              ),
+        ),
+        RepositoryProvider(create: (_) => ApiHelper()),
+        RepositoryProvider(
+          create:
+              (context) =>
+                  AuthRepositoryImpl(RepositoryProvider.of<ApiHelper>(context)),
+        ),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        routerConfig: AppRouter.router,
+      ),
     );
   }
 }

@@ -5,5 +5,6 @@ import 'package:fruit_hub/features/autherntication_screen/domain/entities/regist
 
 abstract class AuthRepository {
   Future<ApiResponse> register(RegistrationEntity registration);
-  Future<ApiResponse> login(LoginEntity login); // Add this line
+  Future<ApiResponse> login(LoginEntity login);
+  Future<ApiResponse> logout();
 }

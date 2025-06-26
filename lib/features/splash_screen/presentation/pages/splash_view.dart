@@ -30,9 +30,9 @@ class _SplashPageState extends State<SplashPage> {
     // Check if user has a valid token
     final token = CacheHelper.getData(key: CacheKeys.accessToken);
     if (token != null && token is String && token.isNotEmpty) {
-      context.goNamed('home');
-    } else {
       context.goNamed('welcome');
+    } else {
+      context.goNamed('home');
     }
   }
 
