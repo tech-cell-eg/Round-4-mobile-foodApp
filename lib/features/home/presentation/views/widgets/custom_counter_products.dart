@@ -6,7 +6,10 @@ import '../../../../../core/utils/app_icons.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class CustomCounterProducts extends StatefulWidget {
-  const CustomCounterProducts({super.key});
+  const CustomCounterProducts({super.key, required this.price, required this.quantity});
+
+  final double price;
+  final int quantity;
 
   @override
   State<CustomCounterProducts> createState() => _CustomCounterProductsState();
@@ -40,14 +43,16 @@ class _CustomCounterProductsState extends State<CustomCounterProducts> {
             GestureDetector(
                 onTap: () {
                   setState(() {
-                    counter++;
+                    if (counter < widget.quantity) {
+                      counter++;
+                    }
                   });
                 },
                 child: SvgPicture.asset(AppIcons.addFruitIcon)),
           ],
         ),
         Spacer(),
-        Text('\$ 2.99', style: AppTextStyles.textStyle32),
+        Text('\$ ${widget.price}', style: AppTextStyles.textStyle32),
       ],
     );
   }

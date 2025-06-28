@@ -6,4 +6,5 @@ abstract class EndPoints {
   static const String logout = '$baseUrl/logout';
   static const String recommendedCombo = '$baseUrl/categories/4/products/';
   static const String cart = '$baseUrl/cart';
+  static const String productDetails = '$baseUrl/products/';
 }

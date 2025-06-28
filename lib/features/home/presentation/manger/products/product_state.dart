@@ -1,4 +1,4 @@
-import 'package:fruit_hub/features/home/domain/models/product_model.dart';
+import '../../../domain/models/product_model.dart';
 
 abstract class ProductState {}
 
@@ -7,7 +7,7 @@ class ProductInitial extends ProductState {}
 class ProductLoading extends ProductState {}
 
 class ProductLoaded extends ProductState {
-  final List<Product> products;
+  final List<ProductModel> products;
 
   ProductLoaded({required this.products});
 }

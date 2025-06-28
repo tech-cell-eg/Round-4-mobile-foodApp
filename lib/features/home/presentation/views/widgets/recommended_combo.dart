@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
 import 'package:go_router/go_router.dart';
 
 class RecommendedCombo extends StatelessWidget {
-  const RecommendedCombo({super.key});
+  const RecommendedCombo({super.key, required this.productId});
+
+  final int productId; // Example product ID, replace with actual ID as needed
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed('fruitDetails');
+        GoRouter.of(context).push(FruitDetailsView.kFruitDetailsView, extra: productId);
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 8),
