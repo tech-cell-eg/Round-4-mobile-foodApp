@@ -13,7 +13,7 @@ class MyBasketCubit extends Cubit<MyBasketState> {
   static MyBasketCubit get(context) => BlocProvider.of(context);
 
   void getShoppingCart() async {
-    shoppingCartRepo
+    await shoppingCartRepo
         .getShoppingCart()
         .then((result) {
           result.fold(
