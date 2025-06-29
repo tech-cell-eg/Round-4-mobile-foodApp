@@ -8,4 +8,8 @@ abstract class EndPoints {
   static const String cart = '$baseUrl/cart';
   static const String productDetails = '$baseUrl/products/';
   static const String favorites = '$baseUrl/favourites';
+  static String categoryProducts(int categoryId) =>
+      '$baseUrl/categories/$categoryId/products/';
+  static String searchProducts(String query) =>
+      '$baseUrl/products?search=$query';
 }

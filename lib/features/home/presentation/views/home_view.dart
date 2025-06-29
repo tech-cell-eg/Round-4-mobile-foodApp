@@ -24,15 +24,19 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  int? selectedIndex;
+  int? selectedIndex = 0; // Hottest is selected by default
   final List<String> menuItems = ["Hottest", "Popular", "New Combo", "Top"];
+  final Map<String, int> categoryIds = {
+    "Hottest": 5,
+    "Popular": 1,
+    "New Combo": 3,
+    "Top": 2,
+  };
   final FocusNode _searchFocusNode = FocusNode();
   late final ProductCubit _productCubit;
-
   @override
   void initState() {
     super.initState();
-    // Initialize dependencies
     final dio = Dio();
     final remoteDataSource = ProductRemoteDataSourceImpl(dio: dio);
     final apiHelper = ApiHelper();
@@ -46,7 +50,9 @@ class _HomeViewState extends State<HomeView> {
       productRepository: productRepository,
       favoritesRepo: favoritRepository,
     );
+
     _productCubit.getRecommendedCombos();
+    _productCubit.getProductsByCategory(categoryIds["Hottest"]!);
   }
 
   @override
@@ -82,12 +88,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: CustomSearchBar(
-                      focusNode: _searchFocusNode,
-                      onSearchChanged: (query) {
-                        // You can handle search changes here if needed
-                      },
-                    ),
+                    child: CustomSearchBar(focusNode: _searchFocusNode),
                   ),
                   const SizedBox(height: 20),
                   Text('Recommended Combo', style: AppTextStyles.textStyle24),
@@ -96,7 +97,12 @@ class _HomeViewState extends State<HomeView> {
                   const SizedBox(height: 24),
                   fruitTopicSelect(),
                   const SizedBox(height: 20),
-                  FruitCardBuilder(),
+                  FruitCardBuilder(
+                    categoryId:
+                        selectedIndex != null
+                            ? categoryIds[menuItems[selectedIndex!]]!
+                            : categoryIds["Hottest"]!,
+                  ),
                   const SizedBox(height: 20),
                 ],
               ),

@@ -1,18 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/home/presentation/manger/products/product_cubit.dart';
+import 'package:fruit_hub/features/home/presentation/manger/products/product_state.dart';
+import 'package:fruit_hub/features/home/presentation/views/widgets/build_search_result.dart';
 
 class CustomSearchBar extends StatefulWidget {
-  const CustomSearchBar({
-    super.key,
-    required this.focusNode,
-    required this.onSearchChanged,
-  });
+  const CustomSearchBar({super.key, required this.focusNode});
 
   final FocusNode focusNode;
-  final Function(String) onSearchChanged;
 
   @override
   State<CustomSearchBar> createState() => _CustomSearchBarState();
@@ -20,12 +21,23 @@ class CustomSearchBar extends StatefulWidget {
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
   final TextEditingController _searchController = TextEditingController();
-  bool _showResults = false;
+  Timer? _debounce;
 
   @override
   void dispose() {
     _searchController.dispose();
+    _debounce?.cancel();
     super.dispose();
+  }
+
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      if (query.isNotEmpty) {
+        context.read<ProductCubit>().searchProducts(query);
+      }
+    });
   }
 
   @override
@@ -56,12 +68,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                       fontSize: AppTextStyles.textStyle14.fontSize,
                     ),
                   ),
-                  onChanged: (value) {
-                    widget.onSearchChanged(value);
-                    setState(() {
-                      _showResults = value.isNotEmpty;
-                    });
-                  },
+                  onChanged: _onSearchChanged,
                 ),
               ),
               Padding(
@@ -76,59 +83,43 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             ],
           ),
         ),
-        if (_showResults)
-          Container(
-            width: double.infinity, // Same width as search bar
-            height: 100, // Fixed height
-            margin: const EdgeInsets.only(top: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 10,
-                  spreadRadius: 2,
+        BlocBuilder<ProductCubit, ProductState>(
+          builder: (context, state) {
+            if (state is SearchLoading) {
+              return SizedBox(
+                width: double.infinity,
+                height: 100,
+                child: const Center(child: CircularProgressIndicator()),
+              );
+            } else if (state is SearchLoaded) {
+              return Container(
+                width: double.infinity,
+                height: 200,
+                margin: const EdgeInsets.only(top: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ],
-            ),
-            child: _buildSearchResults(_searchController.text),
-          ),
-      ],
-    );
-  }
-
-  Widget _buildSearchResults(String query) {
-    // Replace with your actual data
-    final results =
-        query.isEmpty
-            ? <String>[]
-            : ['Fruit Salad 1', 'Fruit Salad 2', 'Combo Salad']
-                .where(
-                  (item) => item.toLowerCase().contains(query.toLowerCase()),
-                )
-                .toList();
-
-    if (results.isEmpty) {
-      return Center(
-        child: Text(
-          'No dishes found for "$query"',
-          style: AppTextStyles.textStyle14,
+                child: buildSearchResults(state.products, context),
+              );
+            } else if (state is SearchError) {
+              return Container(
+                width: double.infinity,
+                height: 100,
+                margin: const EdgeInsets.only(top: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Text(state.message, style: AppTextStyles.textStyle14),
+                ),
+              );
+            }
+            return const SizedBox.shrink();
+          },
         ),
-      );
-    }
-
-    return ListView(
-      padding: const EdgeInsets.all(8),
-      children:
-          results
-              .map(
-                (result) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Text(result, style: AppTextStyles.textStyle14),
-                ),
-              )
-              .toList(),
+      ],
     );
   }
 }

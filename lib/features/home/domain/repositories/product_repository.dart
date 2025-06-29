@@ -7,4 +7,6 @@ abstract class ProductRepository {
   Future<Either<String, ProductModel>> getProductDetails({
     required int productId,
   });
+  Future<ProductsResponse> getProductsByCategory(int categoryId);
+  Future<ProductsResponse> searchProducts(String query);
 }

@@ -21,18 +21,18 @@ class ProductModel {
     this.isFavorite = false,
   });
 
+  // product_model.dart
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id'],
-      name: json['name'],
-      price: double.parse(json['price'].toString()),
-      category: json['category'],
-      description: json['description'],
+      id: json['id'] ?? 0,
+      name: json['name'] ?? 'Unknown',
+      price: double.tryParse(json['price']?.toString() ?? '0') ?? 0.0,
+      category: json['category'] ?? '',
+      description: json['description'] ?? '',
       quantity: json['quantity'] ?? 0,
-      image: json['image'],
-      ingredients: List<String>.from(json['ingredients']),
-      isFavorite:
-          json['is_favorite'] ?? false, // Add this if your API provides it
+      image: json['image'] ?? '',
+      ingredients: List<String>.from(json['ingredients'] ?? []),
+      isFavorite: json['is_favorite'] ?? false,
     );
   }
 
@@ -66,14 +66,46 @@ class ProductsResponse {
   final Pagination pagination;
 
   ProductsResponse({required this.products, required this.pagination});
-
   factory ProductsResponse.fromJson(Map<String, dynamic> json) {
-    return ProductsResponse(
-      products:
+    // Handle different response structures
+    List<ProductModel> productsList = [];
+    Map<String, dynamic> paginationData = {};
+
+    if (json['products'] != null && json['products'] is List) {
+      // Standard case - products array
+      productsList =
           (json['products'] as List)
               .map((product) => ProductModel.fromJson(product))
-              .toList(),
-      pagination: Pagination.fromJson(json['pagination']),
+              .toList();
+      paginationData = {
+        'current_page': json['current_page'] ?? 1,
+        'last_page': json['last_page'] ?? 1,
+        'per_page': json['per_page'] ?? productsList.length,
+        'total': json['total'] ?? productsList.length,
+      };
+    } else if (json['id'] != null) {
+      // Single product response
+      productsList = [ProductModel.fromJson(json)];
+      paginationData = {
+        'current_page': 1,
+        'last_page': 1,
+        'per_page': 1,
+        'total': 1,
+      };
+    } else {
+      // Fallback for empty or unexpected structures
+      productsList = [];
+      paginationData = {
+        'current_page': 1,
+        'last_page': 1,
+        'per_page': 0,
+        'total': 0,
+      };
+    }
+
+    return ProductsResponse(
+      products: productsList,
+      pagination: Pagination.fromJson(paginationData),
     );
   }
 }
