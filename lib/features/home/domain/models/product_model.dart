@@ -4,7 +4,7 @@ class ProductModel {
   final double price;
   final String category;
   final String description;
-  final int? quantity;
+  final int quantity;
   final String image;
   final List<String> ingredients;
   final bool isFavorite;
@@ -28,7 +28,7 @@ class ProductModel {
       price: double.parse(json['price'].toString()),
       category: json['category'],
       description: json['description'],
-      quantity: json['quantity'] ?? 0,
+      quantity: json['quantity'],
       image: json['image'],
       ingredients: List<String>.from(json['ingredients']),
       isFavorite:

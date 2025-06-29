@@ -8,4 +8,5 @@ abstract class EndPoints {
   static const String cart = '$baseUrl/cart';
   static const String productDetails = '$baseUrl/products/';
   static const String favorites = '$baseUrl/favourites';
+  static const String payment = '$baseUrl/payment';
 }

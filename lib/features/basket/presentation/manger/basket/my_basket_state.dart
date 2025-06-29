@@ -18,3 +18,15 @@ final class MyBasketError extends MyBasketState {
 
   MyBasketError(this.error);
 }
+
+final class MyBasketPaymentSuccess extends MyBasketState {
+  final String message;
+
+  MyBasketPaymentSuccess(this.message);
+}
+
+final class MyBasketPaymentFailure extends MyBasketState {
+  final String error;
+
+  MyBasketPaymentFailure(this.error);
+}

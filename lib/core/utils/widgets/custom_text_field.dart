@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
@@ -9,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final Function(String)? onsubment;
   final bool obscureText;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextField({
     super.key,
@@ -17,6 +20,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.controller,
+    this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -24,7 +29,9 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      inputFormatters: inputFormatters,
       validator: validator?.validate,
+      keyboardType: keyboardType,
       onChanged: onsubment,
       decoration: InputDecoration(
         filled: true,

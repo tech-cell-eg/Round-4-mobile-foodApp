@@ -7,4 +7,5 @@ abstract class ProductRepository {
   Future<Either<String, ProductModel>> getProductDetails({
     required int productId,
   });
+  Future<Either<String, String>> addToBasket({required int productId, required int quantity});
 }

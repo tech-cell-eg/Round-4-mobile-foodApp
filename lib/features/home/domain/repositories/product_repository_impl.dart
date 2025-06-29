@@ -43,4 +43,29 @@ class ProductRepositoryImpl implements ProductRepository {
       return Left(errorResponse.message);
     }
   }
+
+  @override
+  Future<Either<String, String>> addToBasket({required int productId, required int quantity}) async {
+    try {
+      ApiResponse response = await apiHelper.postRequest(
+        endPoint: EndPoints.cart,
+        isProtected: true,
+        data: {
+          'product_id': productId,
+          'quantity': quantity,
+        }
+      );
+
+      if (response.status) {
+        return Right(response.message);
+      } else {
+        return Left("Failed to add to basket: ${response.message}");
+      }
+    } catch (e) {
+      ApiResponse errorResponse = ApiResponse.fromError(e);
+      return Left(errorResponse.message);
+    }
+  }
+
+
 }

@@ -37,4 +37,33 @@ class ShoppingCartRepoImplementation implements ShoppingCartRepo {
       return Left(errorResponse.message);
     }
   }
+
+  @override
+  Future<Either<String, String>> payment({required String deliveryAddress, required String phoneNumber, required String cardHolderName, required String cardNumber, required String cardExpiry, required String cardCVC}) async {
+    try {
+      ApiResponse response = await apiHelper.postRequest(
+        endPoint: EndPoints.payment,
+        isProtected: true,
+        data: {
+          'delivery_address': deliveryAddress,
+          'phone_number': phoneNumber,
+          'holder_name': cardHolderName,
+          'card_number': cardNumber,
+          'expiry_date': cardExpiry,
+          'ccv': cardCVC,
+          "payment_method": "visa",
+        }
+      );
+
+      if (response.status) {
+        return Right(response.message);
+      } else {
+        return Left("Failed to process payment: ${response.message}");
+      }
+    } catch (e) {
+      ApiResponse errorResponse = ApiResponse.fromError(e);
+      return Left(errorResponse.message);
+    }
+  }
+
 }

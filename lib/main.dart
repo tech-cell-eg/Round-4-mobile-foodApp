@@ -7,6 +7,9 @@ import 'package:fruit_hub/features/autherntication_screen/domain/repositories/au
 import 'package:fruit_hub/features/autherntication_screen/domain/usecases/logout.dart';
 import 'package:fruit_hub/features/autherntication_screen/presentation/cubit/logout/logoutcubit.dart';
 
+import 'features/basket/data/repo/shopping_cart_repo_implemation.dart';
+import 'features/basket/presentation/manger/basket/my_basket_cubit.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
@@ -20,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => MyBasketCubit(ShoppingCartRepoImplementation())..getShoppingCart(),),
         BlocProvider<AuthCubit>(
           create:
               (context) => AuthCubit(

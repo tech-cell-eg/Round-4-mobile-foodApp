@@ -9,14 +9,24 @@ import 'package:fruit_hub/core/utils/app_toast.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_app_loading.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
+import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_state.dart';
 
 import '../../../../../core/utils/widgets/go_back_icon.dart';
 import 'custom_counter_products.dart';
 
-class ProductDetailsViewBody extends StatelessWidget {
+class ProductDetailsViewBody extends StatefulWidget {
   const ProductDetailsViewBody({super.key});
+
+  @override
+  State<ProductDetailsViewBody> createState() => _ProductDetailsViewBodyState();
+}
+
+class _ProductDetailsViewBodyState extends State<ProductDetailsViewBody> {
+  int counter = 1;
+
+  ProductModel? productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +34,16 @@ class ProductDetailsViewBody extends StatelessWidget {
       listener: (context, state) {
         if (state is ProductDetailsError) {
           AppToast.showErrorToast(state.error);
+        }else if (state is ProductAddToBasketSuccess) {
+          AppToast.showSuccessToast(state.message);
+
+        }else if (state is ProductAddToBasketFailure) {
+          AppToast.showErrorToast(state.error);
         }
       },
       builder: (context, state) {
-        if (state is ProductDetailsLoaded) {
+        if (ProductDetailsCubit.get(context).product != null) {
+          productModel = ProductDetailsCubit.get(context).product;
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -39,7 +55,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     decoration: BoxDecoration(color: AppColors.orangeColor),
-                    child: Image.network(state.product.image, fit: BoxFit.none),
+                    child: Image.network(productModel!.image, fit: BoxFit.none),
                   ),
                 ),
                 bottom: PreferredSize(
@@ -72,15 +88,18 @@ class ProductDetailsViewBody extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        state.product.name,
+                        productModel!.name,
                         style: AppTextStyles.textStyle32,
                       ),
                       SizedBox(
                         height: AppResponsive.height(context, value: 24),
                       ),
                       CustomCounterProducts(
-                        price: state.product.price,
-                        quantity: state.product.quantity ?? 1,
+                        price: productModel!.price,
+                        quantity: productModel!.quantity,
+                        onCounterChanged: (counter) {
+                          this.counter = counter;
+                         },
                       ),
                       SizedBox(
                         height: AppResponsive.height(context, value: 24),
@@ -101,7 +120,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                       ),
                       SizedBox(height: AppResponsive.height(context, value: 8)),
                       Text(
-                        state.product.ingredients.join(', '),
+                        productModel!.ingredients.join(', '),
                         style: AppTextStyles.textStyle16,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
@@ -111,7 +130,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                       ),
                       MyDivider(),
                       Text(
-                        state.product.description,
+                        productModel!.description,
                         style: AppTextStyles.textStyle16,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
@@ -138,6 +157,9 @@ class ProductDetailsViewBody extends StatelessWidget {
                           ),
                           CustomButton(
                             text: 'Add to basket',
+                            ontap: () {
+                              ProductDetailsCubit.get(context).addToBasket(productModel!.id, counter);
+                            },
                             width: AppResponsive.width(context, value: 219),
                             height: AppResponsive.height(context, value: 56),
                           ),
