@@ -7,17 +7,14 @@ import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 import 'package:fruit_hub/features/home/domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  final ProductRemoteDataSource remoteDataSource;
+  final ProductRemoteDataSource? remoteDataSource;
   final ApiHelper apiHelper;
 
-  ProductRepositoryImpl({
-    required this.remoteDataSource,
-    required this.apiHelper,
-  });
+  ProductRepositoryImpl({this.remoteDataSource, required this.apiHelper});
 
   @override
   Future<ProductsResponse> getRecommendedCombos() {
-    return remoteDataSource.getRecommendedCombos();
+    return remoteDataSource!.getRecommendedCombos();
   }
 
   @override

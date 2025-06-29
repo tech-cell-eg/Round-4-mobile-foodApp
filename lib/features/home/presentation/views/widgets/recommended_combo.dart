@@ -25,7 +25,7 @@ class RecommendedCombo extends StatelessWidget {
         }
         return GestureDetector(
           onTap: () {
-            context.pushNamed('fruitDetails', extra: product);
+            context.pushNamed('fruitDetails', extra: product.id);
           },
           child: Padding(
             padding: const EdgeInsets.only(right: 8),
