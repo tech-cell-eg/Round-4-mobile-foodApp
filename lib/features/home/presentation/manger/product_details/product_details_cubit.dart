@@ -1,28 +1,27 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruit_hub/features/basket/data/models/shopping_cart_model.dart';
+import 'package:dartz/dartz.dart';
 import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 import 'package:fruit_hub/features/home/domain/repositories/product_repository.dart';
-import 'package:meta/meta.dart';
-
-part 'product_details_state.dart';
+import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_state.dart';
 
 class ProductDetailsCubit extends Cubit<ProductDetailsState> {
-  ProductDetailsCubit(this.productRepository) : super(ProductDetailsInitial());
-
   final ProductRepository productRepository;
 
-  static ProductDetailsCubit get(context) => BlocProvider.of(context);
+  ProductDetailsCubit({required this.productRepository})
+    : super(ProductDetailsInitial());
 
-  void getProductDetails(int productId) async {
+  Future<void> getProductDetails(int productId) async {
+    emit(ProductDetailsLoading());
     try {
-      final result = await productRepository.getProductDetails(productId: productId);
+      final Either<String, ProductModel> result = await productRepository
+          .getProductDetails(productId: productId);
+
       result.fold(
-        (error) => emit(ProductDetailsError(error)),
-        (productDetails) => emit(ProductDetailsLoaded(productDetails)),
+        (error) => emit(ProductDetailsError(error: error)),
+        (product) => emit(ProductDetailsLoaded(product: product)),
       );
     } catch (e) {
-      emit(ProductDetailsError(e.toString()));
+      emit(ProductDetailsError(error: e.toString()));
     }
   }
 }

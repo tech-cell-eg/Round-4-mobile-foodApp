@@ -7,13 +7,6 @@ import 'package:fruit_hub/core/utils/widgets/custom_app_loading.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
 import 'package:fruit_hub/features/basket/presentation/manger/basket/my_basket_cubit.dart';
-import 'package:fruit_hub/features/basket/presentation/views/order_complete_view.dart';
-import 'package:fruit_hub/features/basket/presentation/views/widgets/custom_bottom_sheet.dart';
-import 'package:go_router/go_router.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import '../../../../../core/helper/app_validator.dart';
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/widgets/custom_text_field.dart';
 import 'custom_fruit_item.dart';
 import 'delivery_info.dart';
 
@@ -75,7 +68,10 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                       Column(
                         children: [
                           Text('Total', style: AppTextStyles.textStyle16),
-                          Text('\$ ${calculateTotalPrice(state.items)}', style: AppTextStyles.textStyle24),
+                          Text(
+                            '\$ ${calculateTotalPrice(state.items)}',
+                            style: AppTextStyles.textStyle24,
+                          ),
                         ],
                       ),
                       SizedBox(width: AppResponsive.width(context, value: 28)),
@@ -87,7 +83,7 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                             backgroundColor: Colors.transparent,
                             barrierColor: Colors.black.withAlpha(150),
                             builder:
-                                (context) => DeliveryInfo(formKey: _formKey,),
+                                (context) => DeliveryInfo(formKey: _formKey),
                           );
                         },
                         width: AppResponsive.width(context, value: 199),

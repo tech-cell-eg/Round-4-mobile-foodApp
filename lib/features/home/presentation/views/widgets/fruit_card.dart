@@ -21,20 +21,18 @@ class FruitCard extends StatelessWidget {
           width: 150,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color:
-                AppColors.darkGrayColor, // Set your container background color
+            color: AppColors.darkGrayColor,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withAlpha(10), // Shadow color
-                spreadRadius: 2, // How far the shadow extends
-                blurRadius: 7, // How soft the shadow is
-                offset: Offset(0, 3), // Changes shadow position (x,y)
+                color: Colors.grey.withAlpha(10),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 3),
               ),
             ],
           ),
           child: Stack(
             children: [
-              // Main content
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -68,8 +66,6 @@ class FruitCard extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Love icon button in top right corner
               Positioned(
                 top: 2,
                 right: 2,

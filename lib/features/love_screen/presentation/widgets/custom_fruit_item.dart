@@ -1,13 +1,20 @@
+// features/favorites/presentation/views/widgets/custom_fruit_item.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
+import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/love_screen/data/models/favorite_model.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_images.dart';
-import '../../../../../core/utils/app_text_styles.dart';
+class FavoritItem extends StatelessWidget {
+  final FavoriteItem item;
+  final VoidCallback onAddPressed;
 
-class CustomFruitItem extends StatelessWidget {
-  const CustomFruitItem({super.key});
+  const FavoritItem({
+    super.key,
+    required this.item,
+    required this.onAddPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,31 +28,29 @@ class CustomFruitItem extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.grayColor,
               borderRadius: BorderRadius.circular(12),
+              image: DecorationImage(
+                image: NetworkImage(item.image),
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Image.asset(AppImages.food, height: 40, width: 40),
           ),
-          SizedBox(width: 14),
+          const SizedBox(width: 14),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Quinoa fruit salad', style: AppTextStyles.textStyle16),
+              Text(item.name, style: AppTextStyles.textStyle16),
               Text(
-                '2packs',
+                '\$${item.price.toStringAsFixed(2)}',
                 style: AppTextStyles.textStyle14.copyWith(
                   color: AppColors.blackColor,
                 ),
               ),
             ],
           ),
-          Spacer(),
-          Column(
-            children: [
-              Text('\$20.00', style: AppTextStyles.textStyle16),
-              IconButton(
-                icon: SvgPicture.asset(AppIcons.addFruitIcon),
-                onPressed: () {},
-              ),
-            ],
+          const Spacer(),
+          IconButton(
+            icon: SvgPicture.asset(AppIcons.addFruitIcon),
+            onPressed: onAddPressed,
           ),
         ],
       ),

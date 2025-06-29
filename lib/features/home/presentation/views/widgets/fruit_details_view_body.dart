@@ -10,6 +10,7 @@ import 'package:fruit_hub/core/utils/widgets/custom_app_loading.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
 import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_cubit.dart';
+import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_state.dart';
 
 import '../../../../../core/utils/widgets/go_back_icon.dart';
 import 'custom_counter_products.dart';
@@ -38,7 +39,7 @@ class ProductDetailsViewBody extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     decoration: BoxDecoration(color: AppColors.orangeColor),
-                    child: Image.network(state.product.image, fit: BoxFit.none,),
+                    child: Image.network(state.product.image, fit: BoxFit.none),
                   ),
                 ),
                 bottom: PreferredSize(
@@ -74,11 +75,20 @@ class ProductDetailsViewBody extends StatelessWidget {
                         state.product.name,
                         style: AppTextStyles.textStyle32,
                       ),
-                      SizedBox(height: AppResponsive.height(context, value: 24)),
-                      CustomCounterProducts(price: state.product.price, quantity: state.product.quantity ?? 1),
-                      SizedBox(height: AppResponsive.height(context, value: 24)),
+                      SizedBox(
+                        height: AppResponsive.height(context, value: 24),
+                      ),
+                      CustomCounterProducts(
+                        price: state.product.price,
+                        quantity: state.product.quantity ?? 1,
+                      ),
+                      SizedBox(
+                        height: AppResponsive.height(context, value: 24),
+                      ),
                       MyDivider(),
-                      SizedBox(height: AppResponsive.height(context, value: 24)),
+                      SizedBox(
+                        height: AppResponsive.height(context, value: 24),
+                      ),
                       Text(
                         'One Pack Contains:',
                         style: AppTextStyles.textStyle20,
@@ -96,7 +106,9 @@ class ProductDetailsViewBody extends StatelessWidget {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(height: AppResponsive.height(context, value: 24)),
+                      SizedBox(
+                        height: AppResponsive.height(context, value: 24),
+                      ),
                       MyDivider(),
                       Text(
                         state.product.description,
@@ -104,13 +116,17 @@ class ProductDetailsViewBody extends StatelessWidget {
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      SizedBox(height: AppResponsive.height(context, value: 24)),
+                      SizedBox(
+                        height: AppResponsive.height(context, value: 24),
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CircleAvatar(
                             radius: 30,
-                            backgroundColor: AppColors.orangeColor.withAlpha(60),
+                            backgroundColor: AppColors.orangeColor.withAlpha(
+                              60,
+                            ),
                             child: SvgPicture.asset(
                               AppIcons.favoriteIcon,
                               width: 25,

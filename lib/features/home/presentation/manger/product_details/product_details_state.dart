@@ -1,18 +1,19 @@
-part of 'product_details_cubit.dart';
+import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 
-@immutable
-sealed class ProductDetailsState {}
+abstract class ProductDetailsState {}
 
-final class ProductDetailsInitial extends ProductDetailsState {}
+class ProductDetailsInitial extends ProductDetailsState {}
 
-final class ProductDetailsLoaded extends ProductDetailsState {
+class ProductDetailsLoading extends ProductDetailsState {}
+
+class ProductDetailsLoaded extends ProductDetailsState {
   final ProductModel product;
 
-  ProductDetailsLoaded(this.product);
+  ProductDetailsLoaded({required this.product});
 }
 
-final class ProductDetailsError extends ProductDetailsState {
+class ProductDetailsError extends ProductDetailsState {
   final String error;
 
-  ProductDetailsError(this.error);
+  ProductDetailsError({required this.error});
 }

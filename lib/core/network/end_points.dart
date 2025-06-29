@@ -7,4 +7,5 @@ abstract class EndPoints {
   static const String recommendedCombo = '$baseUrl/categories/4/products/';
   static const String cart = '$baseUrl/cart';
   static const String productDetails = '$baseUrl/products/';
+  static const String favorites = '$baseUrl/favourites';
 }

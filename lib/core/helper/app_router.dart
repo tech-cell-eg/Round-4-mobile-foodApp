@@ -36,7 +36,8 @@ abstract class AppRouter {
       GoRoute(
         path: FruitDetailsView.kFruitDetailsView,
         name: "fruitDetails",
-        builder: (context, state) => FruitDetailsView(productId: state.extra as int),
+        builder:
+            (context, state) => FruitDetailsView(productId: state.extra as int),
       ),
       GoRoute(
         path: LoveView.kLoveView,
@@ -56,7 +57,7 @@ abstract class AppRouter {
       GoRoute(
         path: HomeView.kHomeView,
         name: "home",
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => HomeView(),
       ),
     ],
   );

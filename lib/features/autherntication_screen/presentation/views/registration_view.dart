@@ -8,6 +8,7 @@ import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/network/api_helper.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/core/utils/app_toast.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
 import 'package:fruit_hub/features/autherntication_screen/domain/entities/registration_entity.dart';
@@ -172,14 +173,10 @@ class RegistrationView extends StatelessWidget {
                                 key: CacheKeys.firstTime,
                                 value: true,
                               );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Registered successfully!'),
-                                  backgroundColor:
-                                      Colors
-                                          .green, // Optional: change color to green
-                                ),
+                              AppToast.showErrorToast(
+                                'Registered successfully!',
                               );
+
                               context.goNamed('home');
                             } else if (state is RegistrationFailure) {
                               ScaffoldMessenger.of(context).showSnackBar(

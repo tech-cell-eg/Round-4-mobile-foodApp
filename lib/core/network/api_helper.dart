@@ -14,14 +14,15 @@ class ApiHelper {
 
   ApiHelper._init();
   Dio dio = Dio(
-      BaseOptions(
-        baseUrl: EndPoints.baseUrl,
-        connectTimeout: Duration(seconds: 10),
-        receiveTimeout: Duration(seconds: 10),
-      )
+    BaseOptions(
+      baseUrl: EndPoints.baseUrl,
+      connectTimeout: Duration(seconds: 10),
+      receiveTimeout: Duration(seconds: 10),
+    ),
   );
   void initDio() {
-    dio.interceptors.add(InterceptorsWrapper(
+    dio.interceptors.add(
+      InterceptorsWrapper(
         onRequest: (options, handler) {
           print("--- Headers : ${options.headers.toString()}");
           print("--- endpoint : ${options.path.toString()}");
@@ -36,78 +37,82 @@ class ApiHelper {
 
           final message = error.response?.data['message'];
           return handler.next(error);
-        }
-    ));
-
+        },
+      ),
+    );
   }
+
   Future<ApiResponse> postRequest({
     required String endPoint,
     Map<String, dynamic>? data,
     bool isFormData = true,
     bool isProtected = false,
-    bool sendRefreshToken = false
-  }) async
-  {
-    return ApiResponse.fromResponse(await dio.post(
+    bool sendRefreshToken = false,
+  }) async {
+    return ApiResponse.fromResponse(
+      await dio.post(
         endPoint,
-        data: isFormData? FormData.fromMap(data??{}): data,
+        data: isFormData ? FormData.fromMap(data ?? {}) : data,
         options: Options(
-            headers:
-            {
-              if(isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
-            }
-        )
-    ));
+          headers: {
+            if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+          },
+        ),
+      ),
+    );
   }
 
   Future<ApiResponse> getRequest({
     required String endPoint,
     Map<String, dynamic>? data,
     bool isFormData = true,
-    bool isProtected = false
-  }) async
-  {
-    return ApiResponse.fromResponse(await dio.get(
+    bool isProtected = false,
+  }) async {
+    return ApiResponse.fromResponse(
+      await dio.get(
         endPoint,
-        data: isFormData? FormData.fromMap(data??{}): data,
+        data: isFormData ? FormData.fromMap(data ?? {}) : data,
         options: Options(
-            headers:
-            {
-              if(isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
-            }
-        )
-    ));
+          headers: {
+            if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+          },
+        ),
+      ),
+    );
   }
 
   Future<ApiResponse> putRequest({
     required String endPoint,
     Map<String, dynamic>? data,
     bool isFormData = true,
-    bool isProtected = false
-  }) async
-  {
-    return ApiResponse.fromResponse(await dio.put(
+    bool isProtected = false,
+  }) async {
+    return ApiResponse.fromResponse(
+      await dio.put(
         endPoint,
-        data: isFormData? FormData.fromMap(data??{}): data,
+        data: isFormData ? FormData.fromMap(data ?? {}) : data,
         options: Options(
-            headers:
-            {
-              if(isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
-            }
-        )
-    ));
+          headers: {
+            if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+          },
+        ),
+      ),
+    );
   }
 
-  Future<ApiResponse> deleteRequest({required String endPoint, bool isProtected = false}) async {
+  Future<ApiResponse> deleteRequest({
+    required String endPoint,
+    bool isProtected = false,
+  }) async {
     return ApiResponse.fromResponse(
-        await dio.delete(
-            endPoint,
-            options: Options(
-                headers: {
-                  if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}'
-                }
-            )
-        )
+      await dio.delete(
+        endPoint,
+        options: Options(
+          headers: {
+            if (isProtected) 'Authorization': 'Bearer ${CacheData.accessToken}',
+          },
+        ),
+      ),
     );
   }
 }

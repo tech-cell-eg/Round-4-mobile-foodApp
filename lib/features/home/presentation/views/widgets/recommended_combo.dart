@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
-import 'package:fruit_hub/features/home/presentation/views/fruit_details_view.dart';
 import 'package:go_router/go_router.dart';
+import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 
 class RecommendedCombo extends StatelessWidget {
-  const RecommendedCombo({super.key, required this.productId});
+  final ProductModel product;
+  final VoidCallback? onAddToCart;
 
-  final int productId; // Example product ID, replace with actual ID as needed
+  const RecommendedCombo({super.key, required this.product, this.onAddToCart});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(FruitDetailsView.kFruitDetailsView, extra: productId);
+        context.pushNamed('fruitDetails', extra: product);
       },
       child: Padding(
         padding: const EdgeInsets.only(right: 8),
@@ -29,7 +30,7 @@ class RecommendedCombo extends StatelessWidget {
                 color: Colors.grey.withAlpha(20),
                 spreadRadius: 2,
                 blurRadius: 7,
-                offset: Offset(0, 3),
+                offset: const Offset(0, 3),
               ),
             ],
           ),
@@ -39,29 +40,36 @@ class RecommendedCombo extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 16),
-                    Image.asset(
-                      'assets/images/food.png',
+                    const SizedBox(height: 16),
+                    Image.network(
+                      product.image,
                       height: 100,
                       width: 100,
+                      fit: BoxFit.cover,
+                      errorBuilder:
+                          (context, error, stackTrace) =>
+                              const Icon(Icons.fastfood, size: 60),
                     ),
                     Text(
-                      "food",
+                      product.name,
                       style: AppTextStyles.textStyle16,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Row(
                         children: [
                           Text('\$ ', style: AppTextStyles.textStyle14),
-                          Text('2,000 ', style: AppTextStyles.textStyle14),
-                          Spacer(flex: 1),
+                          Text(
+                            '${product.price.toStringAsFixed(2)}',
+                            style: AppTextStyles.textStyle14,
+                          ),
+                          const Spacer(flex: 1),
                           IconButton(
                             icon: SvgPicture.asset(AppIcons.addFruitIcon),
-                            onPressed: () {},
+                            onPressed: onAddToCart,
                           ),
                         ],
                       ),
@@ -69,7 +77,6 @@ class RecommendedCombo extends StatelessWidget {
                   ],
                 ),
               ),
-
               Positioned(
                 top: 4,
                 right: 4,

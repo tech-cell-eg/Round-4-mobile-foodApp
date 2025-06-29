@@ -8,6 +8,7 @@ import 'package:fruit_hub/core/helper/app_validator.dart';
 import 'package:fruit_hub/core/network/api_helper.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/core/utils/app_toast.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_text_field.dart';
 import 'package:fruit_hub/features/autherntication_screen/domain/entities/authentication_entity.dart';
@@ -109,12 +110,7 @@ class AuthenticationView extends StatelessWidget {
                                 context.goNamed('home');
                               });
                             } else if (state is LoginFailure) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(state.errorMessage),
-                                  backgroundColor: Colors.red,
-                                ),
-                              );
+                              AppToast.showErrorToast(state.errorMessage);
                             }
                           },
                           builder: (context, state) {
