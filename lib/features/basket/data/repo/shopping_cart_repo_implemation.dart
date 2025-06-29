@@ -23,14 +23,14 @@ class ShoppingCartRepoImplementation implements ShoppingCartRepo {
         isProtected: true,
       );
 
-      if (response.status) {
+      if (response.data != null) {
         ShoppingCartModel shoppingCart = ShoppingCartModel.fromJson(
           response.data,
         );
 
         return Right(shoppingCart.items);
       } else {
-        return Left("Failed to load shopping cart");
+        return Left("Failed to load shopping cart ${response.message}");
       }
     } catch (e) {
       ApiResponse errorResponse = ApiResponse.fromError(e);

@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/cache/cache_data.dart';
 import 'package:fruit_hub/core/cache/cache_helper.dart';
 import 'package:fruit_hub/core/cache/cache_keys.dart';
+import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
+import 'package:fruit_hub/features/welcome_screen/presentation/pages/welcome_view.dart';
 import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
@@ -19,30 +21,19 @@ class _SplashPageState extends State<SplashPage> {
     _checkAuthStatus();
   }
 
-  Future<void> _checkAuthStatus() async {
-    try {
-      await CacheHelper.init();
-
-      await Future.delayed(const Duration(milliseconds: 2));
-      if (!mounted) return;
-
+  void _checkAuthStatus() async {
+    await Future.delayed(const Duration(microseconds: 500)).then((value) {
       CacheData.firstTime = CacheHelper.getData(key: CacheKeys.firstTime);
-
-      if (CacheData.firstTime == null || CacheData.firstTime == true) {
-        context.goNamed('welcome');
-      } else {
+      if (CacheData.firstTime != null) {
         CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
-        if (CacheData.accessToken != null) {
-          context.goNamed('home');
-        } else {
-          context.goNamed('welcome');
+        CacheData.userName = CacheHelper.getData(key: CacheKeys.userName);
+        if (CacheData.accessToken != null && CacheData.userName != null) {
+          GoRouter.of(context).pushReplacement(HomeView.kHomeView);
         }
+      } else {
+        GoRouter.of(context).pushReplacement(WelcomePage.kWelcomeView);
       }
-    } catch (e) {
-      if (mounted) {
-        context.goNamed('welcome');
-      }
-    }
+    });
   }
 
   @override

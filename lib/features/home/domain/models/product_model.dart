@@ -1,14 +1,14 @@
-class Product {
+class ProductModel {
   final int id;
   final String name;
   final double price;
   final String category;
   final String description;
-  final int quantity;
+  final int? quantity;
   final String image;
   final List<String> ingredients;
 
-  Product({
+  ProductModel({
     required this.id,
     required this.name,
     required this.price,
@@ -19,14 +19,14 @@ class Product {
     required this.ingredients,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
       id: json['id'],
       name: json['name'],
       price: double.parse(json['price'].toString()),
       category: json['category'],
       description: json['description'],
-      quantity: json['quantity'],
+      quantity: json['quantity'] ?? 0,
       image: json['image'],
       ingredients: List<String>.from(json['ingredients']),
     );
@@ -34,7 +34,7 @@ class Product {
 }
 
 class ProductsResponse {
-  final List<Product> products;
+  final List<ProductModel> products;
   final Pagination pagination;
 
   ProductsResponse({required this.products, required this.pagination});
@@ -43,7 +43,7 @@ class ProductsResponse {
     return ProductsResponse(
       products:
           (json['products'] as List)
-              .map((product) => Product.fromJson(product))
+              .map((product) => ProductModel.fromJson(product))
               .toList(),
       pagination: Pagination.fromJson(json['pagination']),
     );
