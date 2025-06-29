@@ -5,11 +5,12 @@ import '../../../../../core/utils/app_images.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class CustomFruitItem extends StatelessWidget {
-  const CustomFruitItem({super.key, required this.fruitName, required this.quantity, required this.price});
+  const CustomFruitItem({super.key, required this.fruitName, required this.quantity, required this.price, required this.image});
 
   final String fruitName;
   final int quantity;
   final double price;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CustomFruitItem extends StatelessWidget {
               color: AppColors.grayColor,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Image.asset(AppImages.food, height: 40, width: 40,),
+            child: Image.network(image, height: 40, width: 40,),
           ),
           SizedBox(
             width: 14,

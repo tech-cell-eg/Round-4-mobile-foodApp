@@ -39,6 +39,7 @@ class MyBasketViewBody extends StatelessWidget {
                   child: ListView.separated(
                     itemBuilder:
                         (context, index) => CustomFruitItem(
+                          image: state.items[index].product?.image ?? '',
                           fruitName: state.items[index].name ?? '',
                           quantity: state.items[index].quantity ?? 0,
                           price: state.items[index].price ?? 0.0,

@@ -5,10 +5,13 @@ import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
 import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_cubit.dart';
+import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_state.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_state.dart';
+
+import '../../../../../core/utils/app_toast.dart';
 
 class FruitCard extends StatelessWidget {
   final ProductModel product;
@@ -61,7 +64,7 @@ class FruitCard extends StatelessWidget {
                           fit: BoxFit.cover,
                           errorBuilder:
                               (context, error, stackTrace) =>
-                                  const Icon(Icons.fastfood, size: 40),
+                          const Icon(Icons.fastfood, size: 40),
                         ),
                         Text(
                           product.name,
@@ -69,25 +72,34 @@ class FruitCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            children: [
-                              Text('\$ ', style: AppTextStyles.textStyle14),
-                              Text(
-                                product.price.toStringAsFixed(2),
-                                style: AppTextStyles.textStyle14,
-                              ),
-                              const Spacer(flex: 1),
-                              IconButton(
-                                icon: SvgPicture.asset(AppIcons.addFruitIcon),
-                                onPressed: () {
-                                  ProductDetailsCubit.get(
-                                    context,
-                                  ).addToBasket(product.id, 1);
-                                },
-                              ),
-                            ],
+                        BlocListener<ProductDetailsCubit, ProductDetailsState>(
+                          listener: (context, state) {
+                            if (state is ProductAddToBasketSuccess) {
+                              AppToast.showSuccessToast(state.message);
+                            } else if (state is ProductAddToBasketFailure) {
+                              AppToast.showErrorToast(state.error);
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                Text('\$ ', style: AppTextStyles.textStyle14),
+                                Text(
+                                  product.price.toStringAsFixed(2),
+                                  style: AppTextStyles.textStyle14,
+                                ),
+                                const Spacer(flex: 1),
+                                IconButton(
+                                  icon: SvgPicture.asset(AppIcons.addFruitIcon),
+                                  onPressed: () {
+                                    ProductDetailsCubit.get(
+                                      context,
+                                    ).addToBasket(product.id, 1);
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -100,17 +112,17 @@ class FruitCard extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       constraints: BoxConstraints(),
                       icon:
-                          isFavorite
-                              ? Icon(
-                                Icons.favorite,
-                                size: 20,
-                                color: Colors.red,
-                              )
-                              : Icon(
-                                Icons.favorite_border,
-                                size: 20,
-                                color: AppColors.orangeColor,
-                              ),
+                      isFavorite
+                          ? Icon(
+                        Icons.favorite,
+                        size: 20,
+                        color: Colors.red,
+                      )
+                          : Icon(
+                        Icons.favorite_border,
+                        size: 20,
+                        color: AppColors.orangeColor,
+                      ),
                       onPressed: () async {
                         await productCubit.toggleFavorite(product.id);
                       },
