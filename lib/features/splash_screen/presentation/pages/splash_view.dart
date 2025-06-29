@@ -20,19 +20,26 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _checkAuthStatus() async {
-    // Ensure cache is initialized
-    await CacheHelper.init();
+    try {
+      await CacheHelper.init();
 
-    // Add small delay for splash screen
-    await Future.delayed(const Duration(microseconds: 500));
-    if (!mounted) return;
+      await Future.delayed(const Duration(milliseconds: 2));
+      if (!mounted) return;
 
-    CacheData.firstTime = CacheHelper.getData(key: CacheKeys.firstTime);
-    if (CacheData.firstTime != null) {
-      CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
-      if (CacheData.accessToken != null) {
-        context.goNamed('home');
+      CacheData.firstTime = CacheHelper.getData(key: CacheKeys.firstTime);
+
+      if (CacheData.firstTime == null || CacheData.firstTime == true) {
+        context.goNamed('welcome');
       } else {
+        CacheData.accessToken = CacheHelper.getData(key: CacheKeys.accessToken);
+        if (CacheData.accessToken != null) {
+          context.goNamed('home');
+        } else {
+          context.goNamed('welcome');
+        }
+      }
+    } catch (e) {
+      if (mounted) {
         context.goNamed('welcome');
       }
     }
