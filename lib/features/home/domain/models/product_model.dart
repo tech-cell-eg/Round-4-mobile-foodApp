@@ -7,6 +7,7 @@ class ProductModel {
   final int? quantity;
   final String image;
   final List<String> ingredients;
+  final bool isFavorite;
 
   ProductModel({
     required this.id,
@@ -17,6 +18,7 @@ class ProductModel {
     required this.quantity,
     required this.image,
     required this.ingredients,
+    this.isFavorite = false,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,32 @@ class ProductModel {
       quantity: json['quantity'] ?? 0,
       image: json['image'],
       ingredients: List<String>.from(json['ingredients']),
+      isFavorite:
+          json['is_favorite'] ?? false, // Add this if your API provides it
+    );
+  }
+
+  ProductModel copyWith({
+    int? id,
+    String? name,
+    double? price,
+    String? category,
+    String? description,
+    int? quantity,
+    String? image,
+    List<String>? ingredients,
+    bool? isFavorite,
+  }) {
+    return ProductModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      category: category ?? this.category,
+      description: description ?? this.description,
+      quantity: quantity ?? this.quantity,
+      image: image ?? this.image,
+      ingredients: ingredients ?? this.ingredients,
+      isFavorite: isFavorite ?? this.isFavorite,
     );
   }
 }

@@ -1,5 +1,6 @@
 // features/favorites/data/repo/favorites_repo_impl.dart
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:fruit_hub/core/network/api_helper.dart';
 import 'package:fruit_hub/core/network/api_response.dart';
 import 'package:fruit_hub/core/network/end_points.dart';
@@ -38,7 +39,7 @@ class FavoritesRepoImpl implements FavoritesRepo {
   Future<Either<String, String>> addToFavorites(int productId) async {
     try {
       final response = await apiHelper.postRequest(
-        endPoint: 'favourites',
+        endPoint: EndPoints.favorites,
         data: {'product_id': productId},
         isProtected: true,
       );
@@ -49,7 +50,8 @@ class FavoritesRepoImpl implements FavoritesRepo {
         return Left(response.message);
       }
     } catch (e) {
-      return Left(e.toString());
+      debugPrint('Error in addToFavorites: $e');
+      return Left('Failed to update favorite: ${e.toString()}');
     }
   }
 }

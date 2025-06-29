@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/utils/app_toast.dart';
+import 'package:fruit_hub/core/utils/widgets/custom_app_loading.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_state.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/recommended_combo.dart';
@@ -15,12 +16,6 @@ class RecommendedComboBuilder extends StatefulWidget {
 
 class _RecommendedComboBuilderState extends State<RecommendedComboBuilder> {
   @override
-  void initState() {
-    super.initState();
-    context.read<ProductCubit>().getRecommendedCombos();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 24),
@@ -32,27 +27,21 @@ class _RecommendedComboBuilderState extends State<RecommendedComboBuilder> {
         },
         builder: (context, state) {
           if (state is ProductLoading) {
-            return const SizedBox(
-              height: 220,
-              child: Center(child: CircularProgressIndicator()),
-            );
-          } else if (state is ProductError) {
-            return SizedBox(
-              height: 220,
-              child: Center(child: Text(state.message)),
-            );
-          } else if (state is ProductLoaded) {
+            return const Center(child: CustomAppLoading());
+          } else if (state is ProductLoaded ||
+              state is ProductFavoriteToggled) {
+            final products = context.read<ProductCubit>().products;
             return SizedBox(
               height: 220,
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: state.products.length,
+                itemCount: products.length,
                 separatorBuilder: (context, index) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
                   return RecommendedCombo(
-                    product: state.products[index],
+                    product: products[index],
                     onAddToCart: () {
                       // Handle add to cart logic
                     },

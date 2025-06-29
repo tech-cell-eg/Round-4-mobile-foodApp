@@ -13,6 +13,7 @@ import 'package:fruit_hub/features/home/presentation/views/widgets/custom_appbar
 import 'package:fruit_hub/features/home/presentation/views/widgets/fruit_card_builder.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/recommended_combo_builder.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/search_bar.dart';
+import 'package:fruit_hub/features/love_screen/data/repo/favorites_repo_imp.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -39,8 +40,12 @@ class _HomeViewState extends State<HomeView> {
       remoteDataSource: remoteDataSource,
       apiHelper: apiHelper,
     );
+    final favoritRepository = FavoritesRepoImpl();
 
-    _productCubit = ProductCubit(productRepository: productRepository);
+    _productCubit = ProductCubit(
+      productRepository: productRepository,
+      favoritesRepo: favoritRepository,
+    );
     _productCubit.getRecommendedCombos();
   }
 
