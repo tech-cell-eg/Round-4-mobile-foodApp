@@ -7,7 +7,6 @@ import 'package:fruit_hub/core/utils/widgets/custom_app_loading.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
 import 'package:fruit_hub/features/basket/presentation/manger/basket/my_basket_cubit.dart';
-import '../../../data/repo/shopping_cart_repo_implemation.dart';
 import 'custom_fruit_item.dart';
 import 'delivery_info.dart';
 
@@ -39,8 +38,7 @@ class MyBasketViewBody extends StatelessWidget {
                 Expanded(
                   child: ListView.separated(
                     itemBuilder:
-                        (context, index) =>
-                        CustomFruitItem(
+                        (context, index) => CustomFruitItem(
                           fruitName: state.items[index].name ?? '',
                           quantity: state.items[index].quantity ?? 0,
                           price: state.items[index].price ?? 0.0,
@@ -58,14 +56,12 @@ class MyBasketViewBody extends StatelessWidget {
                         children: [
                           Text('Total', style: AppTextStyles.textStyle16),
                           Text(
-                            '\$ ${calculateTotalPrice(state.items)
-                                .toStringAsFixed(2)}',
+                            '\$ ${calculateTotalPrice(state.items).toStringAsFixed(2)}',
                             style: AppTextStyles.textStyle24,
                           ),
                         ],
                       ),
-                      SizedBox(width: AppResponsive.width(context,
-                          value: 28)),
+                      SizedBox(width: AppResponsive.width(context, value: 28)),
                       CustomButton(
                         text: 'Checkout',
                         ontap: () {
@@ -75,8 +71,7 @@ class MyBasketViewBody extends StatelessWidget {
                             barrierColor: Colors.black.withAlpha(150),
                             isScrollControlled: true,
                             builder:
-                                (context) =>
-                                BlocProvider.value(
+                                (context) => BlocProvider.value(
                                   value: context.read<MyBasketCubit>(),
                                   child: DeliveryInfo(),
                                 ),

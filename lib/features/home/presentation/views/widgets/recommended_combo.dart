@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_state.dart';
 import 'package:go_router/go_router.dart';
@@ -79,7 +80,11 @@ class RecommendedCombo extends StatelessWidget {
                               const Spacer(flex: 1),
                               IconButton(
                                 icon: SvgPicture.asset(AppIcons.addFruitIcon),
-                                onPressed: onAddToCart,
+                                onPressed: () {
+                                  ProductDetailsCubit.get(
+                                    context,
+                                  ).addToBasket(product.id, 1);
+                                },
                               ),
                             ],
                           ),

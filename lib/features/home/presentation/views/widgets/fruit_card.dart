@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fruit_hub/features/home/domain/models/product_model.dart';
 import 'package:fruit_hub/features/home/presentation/manger/products/product_cubit.dart';
@@ -80,7 +81,11 @@ class FruitCard extends StatelessWidget {
                               const Spacer(flex: 1),
                               IconButton(
                                 icon: SvgPicture.asset(AppIcons.addFruitIcon),
-                                onPressed: onAddToCart,
+                                onPressed: () {
+                                  ProductDetailsCubit.get(
+                                    context,
+                                  ).addToBasket(product.id, 1);
+                                },
                               ),
                             ],
                           ),

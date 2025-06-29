@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fruit_hub/features/basket/presentation/manger/basket/my_basket_cubit.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../core/helper/app_responsive.dart';
 import '../../../../../core/helper/app_validator.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_text_styles.dart';
-import '../../../../../core/utils/app_toast.dart';
 import '../../../../../core/utils/widgets/custom_botton.dart';
 import '../../../../../core/utils/widgets/custom_text_field.dart';
 import '../order_complete_view.dart';
@@ -110,10 +107,7 @@ class _CardInfoState extends State<CardInfo> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Date',
-                                  style: AppTextStyles.textStyle20,
-                                ),
+                                Text('Date', style: AppTextStyles.textStyle20),
                                 const SizedBox(height: 18),
                                 SizedBox(
                                   width: AppResponsive.width(

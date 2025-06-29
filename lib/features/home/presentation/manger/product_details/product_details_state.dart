@@ -1,5 +1,3 @@
-import 'package:fruit_hub/features/home/domain/models/product_model.dart';
-
 abstract class ProductDetailsState {}
 
 class ProductDetailsInitial extends ProductDetailsState {}
