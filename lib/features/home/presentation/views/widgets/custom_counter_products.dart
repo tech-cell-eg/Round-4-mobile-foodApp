@@ -21,42 +21,51 @@ class _CustomCounterProductsState extends State<CustomCounterProducts> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Row(
-          children: [
-            GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (counter > 1) {
-                      counter--;
-                      widget.onCounterChanged(counter);
-                    }
-                  });
-                },
-                child: SvgPicture.asset(AppIcons.minFruitIcon)),
-            SizedBox(
-              width: AppResponsive.width(context, value: 20),
-            ),
-            Text('$counter', style: AppTextStyles.textStyle24),
-            SizedBox(
-              width: AppResponsive.width(context, value: 20),
-            ),
-            GestureDetector(
-                onTap: () {
-                  setState(() {
-                    if (counter < widget.quantity) {
-                      counter++;
-                      widget.onCounterChanged(counter);
-                    }
-                  });
-                },
-                child: SvgPicture.asset(AppIcons.addFruitIcon)),
-          ],
+    if (widget.quantity < 1) {
+      return Center(
+        child: Text(
+          'Out of stock',
+          style: AppTextStyles.textStyle16.copyWith(color: Colors.red),
         ),
-        Spacer(),
-        Text('\$ ${widget.price}', style: AppTextStyles.textStyle32),
-      ],
-    );
+      );
+    } else {
+      return Row(
+        children: [
+          Row(
+            children: [
+              GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (counter > 1) {
+                        counter--;
+                        widget.onCounterChanged(counter);
+                      }
+                    });
+                  },
+                  child: SvgPicture.asset(AppIcons.minFruitIcon)),
+              SizedBox(
+                width: AppResponsive.width(context, value: 20),
+              ),
+              Text('$counter', style: AppTextStyles.textStyle24),
+              SizedBox(
+                width: AppResponsive.width(context, value: 20),
+              ),
+              GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (counter < widget.quantity) {
+                        counter++;
+                        widget.onCounterChanged(counter);
+                      }
+                    });
+                  },
+                  child: SvgPicture.asset(AppIcons.addFruitIcon)),
+            ],
+          ),
+          Spacer(),
+          Text('\$ ${widget.price}', style: AppTextStyles.textStyle32),
+        ],
+      );
+    }
   }
 }
