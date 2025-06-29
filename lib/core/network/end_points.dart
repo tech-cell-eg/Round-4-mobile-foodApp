@@ -12,4 +12,5 @@ abstract class EndPoints {
       '$baseUrl/categories/$categoryId/products/';
   static String searchProducts(String query) =>
       '$baseUrl/products?search=$query';
+  static const String payment = '$baseUrl/payment';
 }

@@ -7,24 +7,12 @@ import 'package:fruit_hub/core/utils/widgets/custom_app_loading.dart';
 import 'package:fruit_hub/core/utils/widgets/custom_botton.dart';
 import 'package:fruit_hub/core/utils/widgets/my_divider.dart';
 import 'package:fruit_hub/features/basket/presentation/manger/basket/my_basket_cubit.dart';
+import '../../../data/repo/shopping_cart_repo_implemation.dart';
 import 'custom_fruit_item.dart';
 import 'delivery_info.dart';
 
-class MyBasketViewBody extends StatefulWidget {
+class MyBasketViewBody extends StatelessWidget {
   const MyBasketViewBody({super.key});
-
-  @override
-  State<MyBasketViewBody> createState() => _MyBasketViewBodyState();
-}
-
-class _MyBasketViewBodyState extends State<MyBasketViewBody> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    super.initState();
-    MyBasketCubit.get(context).getShoppingCart();
-  }
 
   double calculateTotalPrice(List items) {
     double total = 0.0;
@@ -51,7 +39,8 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                 Expanded(
                   child: ListView.separated(
                     itemBuilder:
-                        (context, index) => CustomFruitItem(
+                        (context, index) =>
+                        CustomFruitItem(
                           fruitName: state.items[index].name ?? '',
                           quantity: state.items[index].quantity ?? 0,
                           price: state.items[index].price ?? 0.0,
@@ -69,12 +58,14 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                         children: [
                           Text('Total', style: AppTextStyles.textStyle16),
                           Text(
-                            '\$ ${calculateTotalPrice(state.items)}',
+                            '\$ ${calculateTotalPrice(state.items)
+                                .toStringAsFixed(2)}',
                             style: AppTextStyles.textStyle24,
                           ),
                         ],
                       ),
-                      SizedBox(width: AppResponsive.width(context, value: 28)),
+                      SizedBox(width: AppResponsive.width(context,
+                          value: 28)),
                       CustomButton(
                         text: 'Checkout',
                         ontap: () {
@@ -82,8 +73,13 @@ class _MyBasketViewBodyState extends State<MyBasketViewBody> {
                             context: context,
                             backgroundColor: Colors.transparent,
                             barrierColor: Colors.black.withAlpha(150),
+                            isScrollControlled: true,
                             builder:
-                                (context) => DeliveryInfo(formKey: _formKey),
+                                (context) =>
+                                BlocProvider.value(
+                                  value: context.read<MyBasketCubit>(),
+                                  child: DeliveryInfo(),
+                                ),
                           );
                         },
                         width: AppResponsive.width(context, value: 199),

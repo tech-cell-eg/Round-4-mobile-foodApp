@@ -4,7 +4,7 @@ class ProductModel {
   final double price;
   final String category;
   final String description;
-  final int? quantity;
+  final int quantity;
   final String image;
   final List<String> ingredients;
   final bool isFavorite;

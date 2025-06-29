@@ -46,7 +46,6 @@ class ProductRepositoryImpl implements ProductRepository {
     }
   }
 
-  @override
   Future<ProductsResponse> searchProducts(String query) async {
     try {
       ApiResponse response = await apiHelper.getRequest(
@@ -95,6 +94,28 @@ class ProductRepositoryImpl implements ProductRepository {
       }
     } catch (e) {
       throw Exception("Search failed: ${e.toString()}");
+    }
+  }
+
+  Future<Either<String, String>> addToBasket({
+    required int productId,
+    required int quantity,
+  }) async {
+    try {
+      ApiResponse response = await apiHelper.postRequest(
+        endPoint: EndPoints.cart,
+        isProtected: true,
+        data: {'product_id': productId, 'quantity': quantity},
+      );
+
+      if (response.status) {
+        return Right(response.message);
+      } else {
+        return Left("Failed to add to basket: ${response.message}");
+      }
+    } catch (e) {
+      ApiResponse errorResponse = ApiResponse.fromError(e);
+      return Left(errorResponse.message);
     }
   }
 }

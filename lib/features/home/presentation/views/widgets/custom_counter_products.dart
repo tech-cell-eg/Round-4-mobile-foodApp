@@ -6,10 +6,11 @@ import '../../../../../core/utils/app_icons.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
 class CustomCounterProducts extends StatefulWidget {
-  const CustomCounterProducts({super.key, required this.price, required this.quantity});
+  const CustomCounterProducts({super.key, required this.price, required this.quantity, required this.onCounterChanged});
 
   final double price;
   final int quantity;
+  final Function(int) onCounterChanged;
 
   @override
   State<CustomCounterProducts> createState() => _CustomCounterProductsState();
@@ -29,6 +30,7 @@ class _CustomCounterProductsState extends State<CustomCounterProducts> {
                   setState(() {
                     if (counter > 1) {
                       counter--;
+                      widget.onCounterChanged(counter);
                     }
                   });
                 },
@@ -45,6 +47,7 @@ class _CustomCounterProductsState extends State<CustomCounterProducts> {
                   setState(() {
                     if (counter < widget.quantity) {
                       counter++;
+                      widget.onCounterChanged(counter);
                     }
                   });
                 },

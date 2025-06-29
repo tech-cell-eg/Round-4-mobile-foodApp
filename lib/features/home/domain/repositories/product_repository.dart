@@ -9,4 +9,8 @@ abstract class ProductRepository {
   });
   Future<ProductsResponse> getProductsByCategory(int categoryId);
   Future<ProductsResponse> searchProducts(String query);
+  Future<Either<String, String>> addToBasket({
+    required int productId,
+    required int quantity,
+  });
 }
