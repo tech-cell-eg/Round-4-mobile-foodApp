@@ -47,9 +47,7 @@ class _LoveViewBodyState extends State<LoveViewBody> {
       child: ListView.separated(
         itemCount: favorites.length,
         separatorBuilder: (_, __) => const MyDivider(),
-        itemBuilder:
-            (context, index) =>
-                FavoritItem(item: favorites[index], onAddPressed: () {}),
+        itemBuilder: (context, index) => FavoritItem(item: favorites[index]),
       ),
     );
   }

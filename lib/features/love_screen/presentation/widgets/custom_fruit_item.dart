@@ -1,20 +1,15 @@
-// features/favorites/presentation/views/widgets/custom_fruit_item.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/core/utils/app_icons.dart';
 import 'package:fruit_hub/core/utils/app_text_styles.dart';
+import 'package:fruit_hub/features/home/presentation/manger/product_details/product_details_cubit.dart';
 import 'package:fruit_hub/features/love_screen/data/models/favorite_model.dart';
 
 class FavoritItem extends StatelessWidget {
   final FavoriteItem item;
-  final VoidCallback onAddPressed;
 
-  const FavoritItem({
-    super.key,
-    required this.item,
-    required this.onAddPressed,
-  });
+  const FavoritItem({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +45,9 @@ class FavoritItem extends StatelessWidget {
           const Spacer(),
           IconButton(
             icon: SvgPicture.asset(AppIcons.addFruitIcon),
-            onPressed: onAddPressed,
+            onPressed: () {
+              ProductDetailsCubit.get(context).addToBasket(item.id, 1);
+            },
           ),
         ],
       ),
